@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* globals.css */
+body {
+    font-family: 'Bebas_Neue',;
+  }
+  
+input:focus{
+    outline: none;
+}
+
+ 
+textarea:focus{
+    outline: none;
+}
+
