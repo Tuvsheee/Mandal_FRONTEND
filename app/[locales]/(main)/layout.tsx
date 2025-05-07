@@ -1,13 +1,7 @@
 import Header from "@/components/Layout/Header";
 import Footer from "@/components/Layout/Footer";
 
-import {  Bebas_Neue  } from "@next/font/google";
 
-const bebas = Bebas_Neue({
-  weight: ["400"], 
-  subsets: ["latin"], 
-  display: "swap", // 
-});
 
 export default async function MainLayout({
   children,
@@ -19,7 +13,7 @@ export default async function MainLayout({
   };
 }>) {
   return (
-    <html lang={locale} className={`${bebas.className}`}>
+    <html lang={locale}>
       <body className="flex flex-col min-h-screen">
         <Header />
         <main >

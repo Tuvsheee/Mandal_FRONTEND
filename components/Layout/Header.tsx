@@ -9,6 +9,7 @@ import { Additional } from "@/types/additional";
 import { showNotif } from "@/components/Layout/Alert"; 
 import {  X,  Send , Menu} from "lucide-react";
 import axiosInstance from "@/utils/axios";
+import IMGURL from "@/utils/constant";
 
 const Header = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -28,6 +29,7 @@ const Header = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     axiosInstance
@@ -36,6 +38,14 @@ const Header = () => {
       .catch((err) => console.error("Error fetching additional data:", err));
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   // Handle Modal open and close
   const handleModalOpen = () => {
     setIsModalOpen(true);
@@ -66,8 +76,8 @@ const Header = () => {
     setSuccess(false);
 
     try {
-      const response = await axios.post(
-        "https://shinely.tanuweb.cloud/api/v1/feedback",
+      const response = await axiosInstance.post(
+        "/feedback",
         formData
       );
 
@@ -94,7 +104,12 @@ const Header = () => {
   return (
     <>
       {/* Desktop Header */}
-      <div className="hidden md:block border-b border-gray-400 ">
+      <div
+      className={`hidden md:block fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        scrolled ? "bg-white shadow-md border-b border-gray-200" : "bg-white/60 backdrop-blur-md"
+      }`}
+    >
+
         <div className="w-full flex flex-col items-center ">
           {/* Main header content */}
           <div className="w-full flex justify-center">
@@ -103,29 +118,29 @@ const Header = () => {
                 {/* Logo  asdad*/}
                 <Link href="/">
                   <img
-                    src={`https://shinely.tanuweb.cloud/uploads/${
+                    src={`${IMGURL}/${
                       additional?.logo || "default-logo.png"
                     }`}
-                    className="h-24 w-full object-cover"
+                    className="h-20 w-full object-cover"
                     alt="Logo"
                   />
                 </Link>
               </div>
               {/* Navigation links */}
               <div className="space-x-4 md:space-x-12 text-center md:text-left  md:mt-0">
-                <Link href="/about">{t("travel_mongolia")}</Link>
+                <Link href="/tours/inbound">{t("travel_mongolia")}</Link>
                 <div
                   className="inline-block relative"
                   onMouseEnter={() => setDropdownOpen(true)}
                   onMouseLeave={() => setDropdownOpen(false)}
                 >
-                  <Link href="/tours" className="cursor-pointer">
+                  <Link href="/tours/outbound" className="cursor-pointer">
                     {t("travel_korea")}
                   </Link>
                 </div>
-                <Link href="/transport">{t("about_jinst")}</Link>
-                <Link href="/accommodation">{t("transport")}</Link>
-                <Link href="" onClick={handleModalOpen}>{t("contact")}</Link>
+                <Link href="/about">{t("about_jinst")}</Link>
+                <Link href="/transport">{t("transport")}</Link>
+                <Link href="/book" >{t("contact")}</Link>
               </div>
               {/* Locale switcher */}
               <div className="flex items-center gap-4 mt-4 md:mt-0">

@@ -1,63 +1,55 @@
 "use client";
-import RightSideInformation from "./RightSideInformation";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Travel } from "@/types/travel";
-import { Chrono } from "react-chrono";
 import { useTranslations } from "next-intl";
+import IMGURL from "@/utils/constant";
 
 interface Props {
   travel: Travel;
 }
-const MainInformation = ({ travel }: Props) => {
 
+// Define the structure of a single day item
+interface TravelDay {
+  direction: string;
+  program: string;
+  photos: string;
+}
+
+const MainInformation = ({ travel }: Props) => {
   const t = useTranslations("HomePage");
 
-  const chronoData = travel.days.map((list: any, index: number) => {
-    return {
-      title: `${t("day")} ${index + 1}`,
-      cardTitle: list.direction,
-      url: "http://www.history.com",
-      cardDetailedText: list.program,
-      media: {
-        name : "Direction",
-        type: "IMAGE",
-        source: {
-          url: `https://shinely.tanuweb.cloud/uploads/${list.photos}`, 
-        },
-      }
-    };
-  });
   return (
-    <div className="w-full flex md:flex-row flex-col-reverse  md:mt-[5vh] gap-4 relative">
-      <div className="md:max-w-[75%] w-full flex flex-col">
-        <div className="flex items-center justify-between">
-          <span className="text-2xl font-semibold">{t("travel_Information")}</span>
-        </div>
-        <div className="w-full border border-t-black p-6 mt-2">
-          <div className="flex flex-col w-full">
-            <span className="text-sm text-[#555555]">{travel?.duration}</span>
-          </div>
-          <hr className="mt-4" />
-          <div className="flex flex-col w-full">
-            <div className="font-semibold w-full py-4">
-              {t("information")}:
-            </div>
-            <div
-              className="text-sm text-[#555555] text-justify w-full pr-8"
-              dangerouslySetInnerHTML={{ __html: travel?.description }}
-            />
-          </div>
-        </div>
-        <div className="w-full border border-t-black p-6 mt-4 flex flex-col ">
-          <div className="w-full"></div>
-          <Chrono mode="VERTICAL" items={chronoData} disableToolbar />
-        </div>{" "}
+    <div className="w-full flex flex-col gap-6 mt-6">
+      {travel.days.map((day: TravelDay, index: number) => {
+        const isEven = index % 2 === 0;
 
-      </div>
-      <div className="md:w-[25%] w-full ">
-        <RightSideInformation travel={travel} />
-        {/* <WeatherInformation /> */}
-      </div>
+        return (
+          <div
+            key={index}
+            className={`flex flex-col md:flex-row ${
+              isEven ? "md:flex-row" : "md:flex-row-reverse"
+            } items-start md:gap-16`}
+          > 
+            {/* Image */}
+            <div className="md:w-1/2 w-full mt-2">
+              
+              <img
+                src={`${IMGURL}/${day.photos}`}
+                alt={day.direction}
+                className="w-full h-64 object-cover"
+              />
+            </div>
+
+            {/* Text */}
+            <div className="md:w-1/2 w-full">
+              <h2 className="text-xl font-bold my-2">
+                {t("day")} {index + 1} - {day.direction}
+              </h2>
+              <p className="text-gray-700 whitespace-pre-line">{day.program}</p>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 };

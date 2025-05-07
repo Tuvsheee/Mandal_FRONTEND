@@ -1,10 +1,9 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "@/navigation";
-import { useRouter } from "next/navigation"; // Updated import
 import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
 import { useTranslations } from "next-intl";
-import axios from "axios";
+import axiosInstance from "@/utils/axios";
 
 interface AdditionalData {
   address: string;
@@ -13,87 +12,80 @@ interface AdditionalData {
   phone: string;
   facebook: string;
   instagram: string;
+  youtube:string;
 }
 
 const Footer: React.FC = () => {
-  const router = useRouter();
   const t = useTranslations("HomePage");
   const [additionalData, setAdditionalData] = useState<AdditionalData | null>(null);
+
   useEffect(() => {
-    axios
-      .get("https://shinely.tanuweb.cloud/api/v1/additional/")
+    axiosInstance
+      .get("/additional")
       .then((res) => setAdditionalData(res.data.data))
       .catch((err) => console.error("Error fetching additional data:", err));
   }, []);
+
   return (
-    <footer className="bg-[#1b1b1b] text-white text-sm pt-8 mt-4">
-      <div className="max-w-screen-xl mx-auto px-4">
-        <div className="flex flex-col lg:flex-row justify-between mt-4 space-y-4 lg:space-y-0 w-full">
-          <div className="flex flex-col space-y-4 w-full">
-            <div className="text-lg font-semibold">{additionalData?.company || "Company Name"}</div>
-            <p>
-              {t("address")}: {additionalData?.address || "Company address"}
-            </p>
-            <div className="flex items-center  space-x-4 text-white">
-              <a
-                href={additionalData?.facebook || "#"} 
-                target="_blank"
-                rel="noopener noreferrer" 
-                className="border border-gray-400 p-2 rounded-full hover:text-yellow-300"
-              >
-                <FaFacebookF />
-              </a>
-              <a
-                href={additionalData?.instagram || "#"} 
-                target="_blank"
-                rel="noopener noreferrer" 
-                className="border border-gray-400 p-2 rounded-full hover:text-yellow-300"
-              >
-                <FaInstagram />
-              </a>
-            </div>
+    <footer className="bg-[#f6f6f6] text-[#1b1b1b] text-sm mt-8">
+      <div className="max-w-screen-xl mx-auto px-4 py-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 border-b border-gray-300 pb-6">
+          {/* Company Info */}
+          <div>
+            <h2 className="text-lg font-semibold mb-2">{additionalData?.company || "Jinst Od Travel"}</h2>
+            <p className="text-sm text-gray-600">A place where nature and adventure unite</p>
           </div>
 
-          <div className=" text-left space-y-4 border-l border-gray-400 px-4 w-full">
-            <div className="text-lg font-semibold">{t("pages")}</div>   
-              <div className="flex flex-col space-y-4">
-                <Link href={"/travel"} className="hover:underline">
-                  {t("travels")}
-                </Link>
-                <Link href={"/tips"} className="hover:underline">
-                  {t("tourTips")}
-                </Link>
-                <Link href={"/about"} className="hover:underline">
-                  {t("aboutUs")}
-                </Link>
-              </div>
-              
+          {/* About Us */}
+          <div>
+            <h3 className="text-md font-semibold mb-2">Travels</h3>
+            <ul className="space-y-1">
+              <li><Link href="/about" className="hover:underline">Authentic Mongolia Travel</Link></li>
+              <li><Link href="/tips" className="hover:underline">Discover Korea Travel</Link></li>
             
+            </ul>
           </div>
- 
-          <div className="text-left space-y-4 border-l border-gray-400 px-4 w-full">
-            <div className="text-lg font-semibold">{t("customerService") }</div>
-            <div>
-              <p>
-                {t("advice")}: <strong>{additionalData?.phone || "Company phone"}</strong>
-              </p>
-            </div>
-            <div className="mt-4">
-              <p>
-                {t("email")}:{" "}
-                <strong  className="text-yellow-400 underline">
-                  {additionalData?.email || "Company email"}
-                </strong>
-              </p>
-            </div>
+
+          {/* FAQ */}
+          <div>
+            <h3 className="text-md font-semibold mb-2">Pages</h3>
+            <ul className="space-y-1">
+              <li><Link href="/contact" className="hover:underline">About Jinst Od</Link></li>
+              <li><Link href="/contact" className="hover:underline">Transport</Link></li>
+              <li><Link href="/contact" className="hover:underline">Contact</Link></li>
+            </ul>
+          </div>
+
+          {/* Information */}
+          <div>
+            <h3 className="text-md font-semibold mb-2">Contact us</h3>
+            <ul className="space-y-1">
+              <li><Link href="/terms" className="hover:underline"> Email: {additionalData?.email}</Link></li>
+              <li><Link href="/safety" className="hover:underline">Phone: {additionalData?.phone}</Link></li>
+              <li><Link href="/safety" className="hover:underline">Phone: {additionalData?.phone}</Link></li>
+          
+            </ul>
           </div>
         </div>
 
-
-        <div className="flex flex-col lg:flex-row justify-between items-center mt-8 border-t border-gray-300 py-4 text-center lg:text-left">
-          <p>{t('copyright') }</p>
+        {/* Bottom Line */}
+        <div className="flex flex-col md:flex-row justify-between items-center mt-6 text-sm">
+          <p className="text-gray-600 mb-4 md:mb-0">
+            {additionalData?.address || "Jinstod travel Mongolia 17 khoroo 65 bair 24 toot"}
+          </p>
+          <div className="flex space-x-4">
+            <a href={additionalData?.youtube || "#"} target="_blank" rel="noopener noreferrer">
+              <img src="/icons/youtube_dark.svg" alt="" className="w-10 h-10" />
+           
+            </a>
+            <a href={additionalData?.facebook || "#"} target="_blank" rel="noopener noreferrer">
+            <img src="/icons/facebook_dark.svg" alt="" className="w-10 h-10" />
+            </a>
+            <a href={additionalData?.instagram || "#"} target="_blank" rel="noopener noreferrer">
+            <img src="/icons/instagram_dark.svg" alt="" className="w-10 h-10" />
+            </a>
+          </div>
         </div>
-
       </div>
     </footer>
   );

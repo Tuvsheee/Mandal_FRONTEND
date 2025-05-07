@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
-import {  Bebas_Neue  } from "@next/font/google";
+import {  Bebas_Neue ,Poppins } from "@next/font/google";
 
-const bebas = Bebas_Neue({
-  weight: ["400"], 
+
+const poppins = Poppins({
+  weight: ["400","600","700"], 
   subsets: ["latin"], 
   display: "swap", // 
 });
@@ -16,9 +17,11 @@ export const metadata: Metadata = {
     default: "Jinst Od Travel LLC",
     template: "%s | Jinst Od Travel",
   },
-  description:
-    "Jinst Od Travel LLC - Монгол болон Солонгосын аялал жуулчлалын шилдэг үйлчилгээ үзүүлэгч.",
-  metadataBase: new URL("https://jinstod.mn"), // replace with actual domain
+  description:"Jinst Od Travel LLC - Монгол болон Солонгосын аялал жуулчлалын шилдэг үйлчилгээ үзүүлэгч.",
+  icons: {
+    icon: "/logo.png",
+  },
+  metadataBase: new URL("https://jinstod.mn"), 
   alternates: {
     canonical: "https://jinstod.mn",
     languages: {
@@ -34,7 +37,7 @@ export const metadata: Metadata = {
     siteName: "Jinst Od Travel",
     images: [
       {
-        url: "https://jinstod.mn/og-image.jpg", // replace with actual image
+        url: "https://jinstod.mn/og-image.jpg", 
         width: 1200,
         height: 630,
         alt: "Jinst Od аяллын зураг",
@@ -50,15 +53,14 @@ export const metadata: Metadata = {
       "Монгол, Солонгос чиглэлийн аялал жуулчлалын онцгой үйлчилгээ.",
     images: ["https://jinstod.mn/twitter-image.jpg"], 
   },
-  icons: {
-    icon: "/favicon.ico",
-  },
+ 
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="mn" className={`${bebas.className}`}>
+    <html lang="mn" className={` ${poppins.className}`}>
       <head>
+        <link rel="icon" href="/favicon.ico" />
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>

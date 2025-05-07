@@ -1,9 +1,8 @@
 import axios from 'axios';
-export const IMGURL = "https://tsast.tanuweb.cloud/uploads";
 
 const axiosInstance = axios.create({
     baseURL: "http://localhost:8001/api/v1",
-    // baseURL: "https://tsast.tanuweb.cloud/api/v1",
+    // baseURL: "https://jinst.tanuweb.cloud/api/v1",
 });
 
 axiosInstance.interceptors.request.use(

@@ -3,9 +3,12 @@ export interface Additional {
   logo: string;
   company: string;
   email: string;
-  phone: string;
+  phone1: string;
+  phone2: string;
   facebook: string;
   instagram: string; 
+  whatsapp: string; 
+  youtube: string; 
   address: string;
   createdAt: string;
   travels: string;
@@ -13,5 +16,6 @@ export interface Additional {
   experience: string;
   description1: string;
   description2: string;
-  cover:string;
+  aboutCover1:string;
+  aboutCover2:string;
 }

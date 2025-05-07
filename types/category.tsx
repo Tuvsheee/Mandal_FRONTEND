@@ -3,6 +3,7 @@ export interface Category {
   description: string;
   _id: string;
   photo: string;
-  language: "kr" | "en" | "mn";
+  language: "kr" | "en" | "mn" | "chn" | "jp";
   createdAt: string;
+  isOut:boolean; 
 }

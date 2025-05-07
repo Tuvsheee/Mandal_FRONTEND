@@ -1,12 +1,15 @@
 "use client";
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import axios from "axios";
+import useAdditionalStore from "@/store/addtional";
+import axiosInstance from "@/utils/axios";
 
 export default function CustomTravelPage() {
+  const t = useTranslations("HomePage");
+  
   const [formData, setFormData] = useState({
-    title: "Ноён.", 
+    title: "Ноён.",
     name: "",
     email: "",
     startDate: "",
@@ -15,7 +18,7 @@ export default function CustomTravelPage() {
     content: "",
     adultNumber: 0,
     kidsNumber: 0,
-    people:""
+    people: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -28,8 +31,8 @@ export default function CustomTravelPage() {
     >
   ) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
+    setFormData((prev) => ({
+      ...prev,
       [name]: value,
     }));
   };
@@ -41,190 +44,133 @@ export default function CustomTravelPage() {
     setSuccess(false);
 
     try {
-      const response = await axios.post(
-        "https://shinely.tanuweb.cloud/api/v1/booking",
-        formData
-      );
-
-      const responseData = await response.data.data;
-      console.log("Server Response:", responseData);
-
-      console.log("Form submission successful:", responseData);
+      await axiosInstance.post("/booking", formData);
       setSuccess(true);
     } catch (err) {
-      if (err instanceof Error) {
-        setError(err.message); // Safely access the message property
-      } else {
-        setError("There was an issue submitting the form. Please try again.");
-      }
+      setError("Form submission failed. Please try again.");
       console.error(err);
     } finally {
       setLoading(false);
     }
   };
+  const { data, fetchData } = useAdditionalStore();
 
-  const t = useTranslations("HomePage");
+  useEffect(() => {
+    fetchData();
+  }, []);
+  if (!data) return <p>Loading...</p>; 
+
+
+  const info = data; // safely access the first entry
 
   return (
-    <div className="max-w-3xl mx-auto bg-white p-8 shadow-lg rounded-lg my-8 mt-0">
-      <h2 className="text-center text-2xl text-black font-bold mb-8">
-        {t("whereWouldYouLikeToTravel")}
-      </h2>
+    <div className="max-w-6xl mx-auto md:my-24 my-10 px-4 md:px-0">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+        {/* FORM SECTION */}
+        <div className="w-full">
+          <h3 className="text-lg font-bold uppercase text-[#1a1a1a] border-b border-[#c59a3b] pb-2 mb-6">
+            {t("whereWouldYouLikeToTravel") || "Where would you like"}
+          </h3>
 
-      {error && <p className="text-red-500 text-center">{error}</p>}
-      {success && (
-        <p className="text-green-500 text-center">{t("formSuccessMessage")}</p>
-      )}
+          {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
+          {success && (
+            <p className="text-green-600 text-sm mb-2">
+              {t("formSuccessMessage") || "Your request was sent successfully!"}
+            </p>
+          )}
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Row 1: Title, Name, Email */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div>
-            <label htmlFor="title" className="block font-medium mb-1">
-              {t("case")}
-            </label>
+          <form onSubmit={handleSubmit} className="space-y-4">
             <select
-              id="title"
               name="title"
               value={formData.title}
               onChange={handleChange}
-              className="w-full border border-gray-300 p-2 rounded text-gray-400"
+              className="w-full border border-gray-300 p-2 rounded text-gray-700"
             >
-              <option value="Ноён.">{t("mr")}</option>
-              <option value="Хатагтай.">{t("ms")}</option>
+              <option value="Ноён.">{t("mr") || "Mr."}</option>
+              <option value="Хатагтай.">{t("ms") || "Ms."}</option>
             </select>
-          </div>
-          <div>
-            <label htmlFor="name" className="block font-medium mb-1">
-              {t("name")}
-            </label>
+
             <input
-              id="name"
-              name="name"
               type="text"
+              name="name"
+              placeholder={t("yourName") || "Your Name"}
               value={formData.name}
               onChange={handleChange}
               className="w-full border border-gray-300 p-2 rounded"
-              placeholder={t("yourName")}
             />
-          </div>
-          <div>
-            <label htmlFor="email" className="block font-medium mb-1">
-              {t("email")}
-            </label>
+
             <input
-              id="email"
-              name="email"
               type="email"
+              name="email"
+              placeholder={t("yourEmail") || "Your Email"}
               value={formData.email}
               onChange={handleChange}
               className="w-full border border-gray-300 p-2 rounded"
-              placeholder={t("yourEmail")}
             />
-          </div>
-        </div>
 
-        {/* Row 2: Start Date, End Date, Phone Number */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div>
-            <label htmlFor="startDate" className="block font-medium mb-1">
-              {t("dateOfTravelArrival")}
-            </label>
             <input
-              id="startDate"
-              name="startDate"
-              type="date"
-              value={formData.startDate}
-              onChange={handleChange}
-              className="w-full border border-gray-300 p-2 rounded text-gray-400"
-            />
-          </div>
-          <div>
-            <label htmlFor="endDate" className="block font-medium mb-1">
-              {t("dateOfTravelReturn")}
-            </label>
-            <input
-              id="endDate"
-              name="endDate"
-              type="date"
-              value={formData.endDate}
-              onChange={handleChange}
-              className="w-full border border-gray-300 p-2 rounded text-gray-400"
-            />
-          </div>
-          <div>
-            <label htmlFor="phone" className="block font-medium mb-1">
-              {t("phone")}
-            </label>
-            <input
-              id="phone"
-              name="phone"
               type="text"
-              value={formData.phone}
+              name="people"
+              placeholder={t("subject") || "Subject"}
+              value={formData.people}
               onChange={handleChange}
               className="w-full border border-gray-300 p-2 rounded"
-              placeholder={t("phone")}
             />
-          </div>
+
+            <textarea
+              name="content"
+              placeholder={t("yourLetter") || "Message"}
+              value={formData.content}
+              onChange={handleChange}
+              className="w-full border border-gray-300 p-2 rounded min-h-[120px]"
+            />
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="bg-[#c59a3b] hover:bg-yellow-700 text-white font-semibold py-2 px-4 w-full rounded"
+            >
+              {loading ? "Sending..." : "Send Request"}
+            </button>
+          </form>
         </div>
 
-        <div>
-          <label htmlFor="content" className="block font-medium mb-1">
-            {t("letter")}
-          </label>
-          <textarea
-            id="content"
-            name="content"
-            value={formData.content}
-            onChange={handleChange}
-            className="w-full border border-gray-300 p-2 rounded"
-            rows={4}
-            placeholder={t("yourLetter")}
-          />
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* CONTACT SECTION */}
+        <div className="text-sm text-gray-800 leading-relaxed space-y-6">
           <div>
-            <label htmlFor="kidsNumber" className="block font-medium mb-1">
-              {t("numberOfChildren")}
-            </label>
-            <input
-              id="kidsNumber"
-              name="kidsNumber"
-              type="number"
-              value={formData.kidsNumber}
-              onChange={handleChange}
-              className="w-full border border-gray-300 p-2 rounded"
-            />
+            <h4 className="text-base font-semibold border-b pb-1 mb-2">About us</h4>
+            <p>{info?.description1 || "No description available."}</p>
           </div>
-          <div>
-            <label htmlFor="adultNumber" className="block font-medium mb-1">
-              {t("numberOfAdults")}
-            </label>
-            <input
-              id="adultNumber"
-              name="adultNumber"
-              type="number"
-              value={formData.adultNumber}
-              onChange={handleChange}
-              className="w-full border border-gray-300 p-2 rounded"
-            />
-          </div>
-        </div>
 
-        {/* Submit Button */}
-        <div className="text-center mt-6">
-          <button
-            className="relative mt-auto rounded-b-xl h-12 w-full overflow-hidden border border-teal-600 text-black transition-all duration-200 before:absolute before:bottom-0 before:left-0 before:right-0 before:top-0 before:m-auto before:h-0 before:w-0 before:rounded-sm before:bg-teal-600 before:duration-300 before:ease-out hover:text-white hover:shadow-indigo-600 hover:before:h-full hover:before:w-full hover:before:opacity-80"
-            type="submit"
-            disabled={loading}
-          >
-            <span className="relative z-10">
-              {loading ? t("submitting") : t("sendRequest")}
-            </span>
-          </button>
+          <div>
+            <h4 className="text-base font-semibold border-b pb-1 mb-2">Contact us</h4>
+            {info?.phone && (
+              <>
+                <p>Tel: {info.phone}</p>
+                <p>Tel: {info.phone}</p>
+              </>
+            )}
+            {info?.email && (
+              <p>
+                Email:{" "}
+                <a href={`mailto:${info.email}`} className="text-[#c59a3b]">
+                  {info.email}
+                </a>
+              </p>
+            )}
+            {info?.address && <p>Address: {info.address}</p>}
+            {info?.whatsapp && <p>WhatsApp: {info.whatsapp}</p>}
+            {info?.facebook && (
+              <p>
+                Facebook:{" "}
+                <a href={info.facebook} className="text-[#c59a3b]">
+                  {info.facebook}
+                </a>
+              </p>
+            )}
+          </div>
         </div>
-      </form>
+      </div>
     </div>
   );
 }

@@ -58,7 +58,7 @@ const MainInformation = ({ hostel }: Props) => {
                   <div className="mt-4">
                     <button 
                       onClick={() => setIsModalOpen(true)}
-                      className="bg-red-500 text-white px-6 py-2 rounded-md uppercase font-semibold hover:bg-red-600 transition"
+                      className="bg-red-500 text-white px-6 py-2 rounded-md uppercase  font-semibold hover:bg-red-600 transition"
                     >
                       {t("BOOK_NOW")}
                     </button>

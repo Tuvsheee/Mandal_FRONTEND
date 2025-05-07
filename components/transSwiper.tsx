@@ -29,7 +29,7 @@ const TransSwiper = ({ trans, showArrow }: Props) => {
         <span className="text-4xl font-bold text-[#5C98F2]">{t("transport")}</span>
       </div>
 
-      {/* Swiper Section */}
+
       <Swiper
         modules={[Navigation, Pagination]}
         spaceBetween={30}

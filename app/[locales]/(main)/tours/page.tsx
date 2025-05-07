@@ -1,6 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { Travel } from "@/types/travel";
+import React, { useEffect } from "react";
 import Sort from "@/components/travel/TravelSort";
 import CustomContainer from "@/components/Layout/CustomContainer";
 import TravelHeading from "@/components/travel/TravelHeading";
@@ -8,15 +7,17 @@ import TravelList from "@/components/travel/TravelList";
 import TravelFilter from "@/components/travel/TravelFilter";
 import useTravelStore from "@/store/travel";
 import { useLocale } from "next-intl";
+import useCategoryStore from "@/store/category";
   
 const AllTravelScreen = () => {
   const locale = useLocale();
-  const [single, setSingle] = useState<Travel | null>();
   const { fetchTravel, travels } = useTravelStore();
+  const { fetchData } = useCategoryStore();
    
   useEffect(() => {
     fetchTravel();
-  }, []); // Add dependency array 
+    fetchData();
+  }, []); 
   const filteredTravels = travels.filter((travel) => travel.language === locale);
 
   return (

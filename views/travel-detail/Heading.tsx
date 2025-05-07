@@ -39,32 +39,16 @@ const Heading = ({ travel }: Props) => {
         })}
         <span className="text-[#555555] text-sm mx-2">{travel?.title}</span>
       </div>
-      {/* <div className="w-full flex items-center justify-between">
-        <div className=" flex items-center gap-4">
-          <span className="bg-[#5778BB] text-white px-4 rounded">
-            {t("overseas_package")}
-          </span>
-          <span className="text-sm text-[#555555] md:block hidden">
-            {t("rating")}: 4.5/5
-          </span>
-        </div>
-        <div className="flex items-center gap-4">
-          <div className="flex gap-2 cursor-pointer">
-            <Heart size={20} color="#555555" />
-            <span className="text-sm text-[#555555]">{t("save")}</span>
-          </div>
-          <div className="flex gap-2 cursor-pointer">
-            <Share2 size={20} color="#555555" />
-            <span className="text-sm text-[#555555]">{t("share")}</span>
-          </div>
-        </div>
-      </div> */}
-      <div className="w-full mt-4">
-        <span className="font-semibold text-3xl">
-        {travel?.title}
+    
+      <div className="w-full flex flex-col my-12">
+        <span className="font-semibold text-[30px]">
+          {travel?.title}
+        </span>
+        <span className="text-[20px] mt-2 ">
+          {travel?.description}
         </span>
       </div>
-      <hr className="border-[1px] bg-black border-black mt-3" />
+     
     </div>
   );
 };

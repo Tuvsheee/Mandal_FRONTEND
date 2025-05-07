@@ -1,16 +1,7 @@
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 
-import {  Bebas_Neue  } from "@next/font/google";
-
-const bebas = Bebas_Neue({
-  weight: ["400"], 
-  subsets: ["latin"], 
-  display: "swap", // 
-});
-
-
-export default async function MainLayout({
+export default async function LocaleLayout({
   children,
   params: { locale },
 }: Readonly<{
@@ -21,12 +12,13 @@ export default async function MainLayout({
 }>) {
   const messages = await getMessages();
   return (
-    <div className="w-full flex flex-col items-center ">
-      <NextIntlClientProvider messages={messages}>
-        <main className="w-full max-w-3xl lg:max-w-5xl xl:max-w-full flex flex-col items-center">
+   
+    <html lang={locale}>
+      <body>
+        <NextIntlClientProvider messages={messages}>
           {children}
-        </main>
-      </NextIntlClientProvider>
-    </div>
+        </NextIntlClientProvider>
+      </body>
+    </html>
   );
 }

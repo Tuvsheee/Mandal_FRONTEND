@@ -62,7 +62,7 @@ const SpecialTravel = ({ travels, showArrow }: Props) => {
   }
 
   return (
-    <div className="slider-container w-full flex flex-col">
+    <div className="slider-container w-full flex flex-col mt-24">
       <div className="w-full flex justify-center">
         <div className="flex items-center justify-center gap-4 max-w-[1200px] w-full py-0 md:px-0 flex-wrap">
           <span className="text-4xl font-bold">{t("special")}</span>
