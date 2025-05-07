@@ -144,10 +144,16 @@ export default function CustomTravelPage() {
 
           <div>
             <h4 className="text-base font-semibold border-b pb-1 mb-2">Contact us</h4>
-            {info?.phone && (
+            {info?.phone1 && (
               <>
-                <p>Tel: {info.phone}</p>
-                <p>Tel: {info.phone}</p>
+                <p>Tel: {info.phone1}</p>
+              
+              </>
+            )}
+            {info?.phone2 && (
+              <>
+                <p>Tel: {info.phone2}</p>
+              
               </>
             )}
             {info?.email && (

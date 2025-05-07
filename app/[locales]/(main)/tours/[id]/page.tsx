@@ -11,7 +11,7 @@ import Loader from "@/components/common/Loader";
 import BookingCard from "@/views/travel-detail/BookingCard";
 import SimpleTravel from "@/components/home/SimpleTravel";
 import { useLocale } from "next-intl";
-import { InboundCategoryList } from "@/app/[locales]/(main)/tours/inbound/page";
+import Page  from "@/app/[locales]/(main)/tours/inbound/page"; 
 
 const TravelDetailScreen = () => {
   const locale = useLocale();
@@ -43,7 +43,7 @@ const TravelDetailScreen = () => {
 
       />
        <SimpleTravel showArrow travels={filteredTravels} />
-       <InboundCategoryList />
+       <Page />
     </CustomContainer>
   );
 };

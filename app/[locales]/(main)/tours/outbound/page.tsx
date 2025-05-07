@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useEffect } from "react";
 import CustomContainer from "@/components/Layout/CustomContainer";
 import DefaultContainer from "@/components/Layout/DefaultContainer";
@@ -7,28 +8,7 @@ import useCategoryStore from "@/store/category";
 import { Link } from "@/navigation";
 import IMGURL from "@/utils/constant";
 
-
-export const InboundIntro = () => (
-  <DefaultContainer>
-    <div className="w-full">
-      <video
-        src="/vedio/bg-vedio.mp4"
-        autoPlay
-        muted
-        loop
-        className="w-full h-[100vh] object-cover bg-cover rounded-lg"
-      />
-    </div>
-    <CustomContainer>
-      <div className="text-center mt-4 mb-6">
-        <h1 className="text-2xl md:text-3xl font-bold">Welcome to the world of JINST OD</h1>
-      </div>
-    </CustomContainer>
-  </DefaultContainer>
-);
-
-// 👇 Subcomponent: Category Cards Only
-export const OutBoundCategoryList = () => {
+const Page = () => {
   const locale = useLocale();
   const { fetchData, data } = useCategoryStore();
 
@@ -40,7 +20,28 @@ export const OutBoundCategoryList = () => {
     (cat) => cat.language === locale && cat.isOut === true
   );
 
-  return (
+  const InboundIntro = () => (
+    <DefaultContainer>
+      <div className="w-full">
+        <video
+          src="/vedio/bg-vedio.mp4"
+          autoPlay
+          muted
+          loop
+          className="w-full h-[100vh] object-cover bg-cover rounded-lg"
+        />
+      </div>
+      <CustomContainer>
+        <div className="text-center mt-4 mb-6">
+          <h1 className="text-2xl md:text-3xl font-bold">
+            Welcome to the world of JINST OD
+          </h1>
+        </div>
+      </CustomContainer>
+    </DefaultContainer>
+  );
+
+  const OutBoundCategoryList = () => (
     <CustomContainer>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full mt-6">
         {filteredCategories.map((cat) => (
@@ -65,14 +66,13 @@ export const OutBoundCategoryList = () => {
       </div>
     </CustomContainer>
   );
+
+  return (
+    <>
+      <InboundIntro />
+      <OutBoundCategoryList />
+    </>
+  );
 };
 
-// 👇 Full Component (if needed)
-const OutBounCategory = () => (
-  <>
-    <InboundIntro />
-    <OutBoundCategoryList />
-  </>
-);
-
-export default OutBounCategory;
+export default Page;
