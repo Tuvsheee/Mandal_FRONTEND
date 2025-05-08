@@ -31,6 +31,7 @@ const AllTravelScreen = () => {
       </div>
       <CustomContainer>
         <SimpleTravel showArrow travels={filteredTravels} />
+      
       </CustomContainer>
     </DefaultContainer>
     

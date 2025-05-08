@@ -5,6 +5,7 @@ export interface Trans {
     description: string;
     photo: string;
     createdAt: string;
+    price: string;
     language: "en" | "mn" | "kr";
   }
    

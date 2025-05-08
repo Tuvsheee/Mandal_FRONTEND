@@ -11,7 +11,8 @@ import Loader from "@/components/common/Loader";
 import BookingCard from "@/views/travel-detail/BookingCard";
 import SimpleTravel from "@/components/home/SimpleTravel";
 import { useLocale } from "next-intl";
-import Page  from "@/app/[locales]/(main)/tours/inbound/page"; 
+import InboundCategoryList from "@/components/InboundCategoryList";
+import OutboundCategoryList from "@/components/OutboundCategoryList";
 
 const TravelDetailScreen = () => {
   const locale = useLocale();
@@ -40,10 +41,10 @@ const TravelDetailScreen = () => {
         title={single.title}
         price={single.price}
         description={single.description}
-
       />
-       <SimpleTravel showArrow travels={filteredTravels} />
-       <Page />
+      <SimpleTravel showArrow travels={filteredTravels} />
+      <InboundCategoryList />
+      <OutboundCategoryList />
     </CustomContainer>
   );
 };

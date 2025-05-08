@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import axios from "axios";
 import useAdditionalStore from "@/store/addtional";
 import axiosInstance from "@/utils/axios";
 
@@ -14,11 +13,10 @@ export default function CustomTravelPage() {
     email: "",
     startDate: "",
     endDate: "",
-    phone: "",
     content: "",
     adultNumber: 0,
     kidsNumber: 0,
-    people: "",
+    phone: 0,
   });
 
   const [loading, setLoading] = useState(false);
@@ -44,7 +42,7 @@ export default function CustomTravelPage() {
     setSuccess(false);
 
     try {
-      await axiosInstance.post("/booking", formData);
+      await axiosInstance.post("/feedback", formData);
       setSuccess(true);
     } catch (err) {
       setError("Form submission failed. Please try again.");
@@ -64,20 +62,13 @@ export default function CustomTravelPage() {
   const info = data; // safely access the first entry
 
   return (
-    <div className="max-w-6xl mx-auto md:my-24 my-10 px-4 md:px-0">
+    <div className="max-w-6xl mx-auto md:mx-12 md:my-24 my-10 px-4 md:px-0">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
         {/* FORM SECTION */}
         <div className="w-full">
           <h3 className="text-lg font-bold uppercase text-[#1a1a1a] border-b border-[#c59a3b] pb-2 mb-6">
             {t("whereWouldYouLikeToTravel") || "Where would you like"}
           </h3>
-
-          {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
-          {success && (
-            <p className="text-green-600 text-sm mb-2">
-              {t("formSuccessMessage") || "Your request was sent successfully!"}
-            </p>
-          )}
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <select
@@ -109,10 +100,10 @@ export default function CustomTravelPage() {
             />
 
             <input
-              type="text"
-              name="people"
-              placeholder={t("subject") || "Subject"}
-              value={formData.people}
+              type="number"
+              name="phone"
+              placeholder={t("yourPhone") || "Subject"}
+              value={formData.phone}
               onChange={handleChange}
               className="w-full border border-gray-300 p-2 rounded"
             />
@@ -132,28 +123,37 @@ export default function CustomTravelPage() {
             >
               {loading ? "Sending..." : "Send Request"}
             </button>
+            {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
+            {success && (
+              <p className="text-green-600 text-sm mb-2">
+                {t("formSuccessMessage") ||
+                  "Your request was sent successfully!"}
+              </p>
+            )}
           </form>
         </div>
 
         {/* CONTACT SECTION */}
         <div className="text-sm text-gray-800 leading-relaxed space-y-6">
           <div>
-            <h4 className="text-base font-semibold border-b pb-1 mb-2">About us</h4>
+            <h4 className="text-base font-semibold border-b pb-1 mb-2">
+              About us
+            </h4>
             <p>{info?.description1 || "No description available."}</p>
           </div>
 
           <div>
-            <h4 className="text-base font-semibold border-b pb-1 mb-2">Contact us</h4>
+            <h4 className="text-base font-semibold border-b pb-1 mb-2">
+              Contact us
+            </h4>
             {info?.phone1 && (
               <>
                 <p>Tel: {info.phone1}</p>
-              
               </>
             )}
             {info?.phone2 && (
               <>
                 <p>Tel: {info.phone2}</p>
-              
               </>
             )}
             {info?.email && (

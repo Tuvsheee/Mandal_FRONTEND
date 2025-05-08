@@ -1,19 +1,16 @@
-import { type NextRequest } from "next/server";
+import { type MetadataRoute } from "next";
 
-export const runtime = "edge";
+const robots = (): MetadataRoute.Robots => {
+  return {
+    rules: [
+      {
+        userAgent: "*",
+        allow: "/",
+      },
+    ],
+    sitemap: "https://jinstod.com/sitemap.xml",
+    host: "https://jinstod.com",
+  };
+};
 
-export async function GET(req: NextRequest) {
-  const body = `
-User-agent: *
-Allow: /
-
-Sitemap: https://jinstod.com/sitemap.xml
-Host: https://jinstod.com
-`;
-
-  return new Response(body.trim(), {
-    headers: {
-      "Content-Type": "text/plain",
-    },
-  });
-}
+export default robots;
