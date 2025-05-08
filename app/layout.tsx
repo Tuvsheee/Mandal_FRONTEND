@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
-import {  Bebas_Neue ,Poppins } from "@next/font/google";
+import {   Poppins } from "@next/font/google";
 
 
 const poppins = Poppins({
