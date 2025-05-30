@@ -37,10 +37,10 @@ export default function Home() {
     <>
       <DefaultContainer >
         <CarouselSlider showArrow banner={banner} />
-        <CustomContainer className=" md:px-0 overflow-hidden">
+        {/* <CustomContainer className=" md:px-0 overflow-hidden">
           <SimpleTravel showArrow travels={filteredTravels} />
       
-        </CustomContainer>
+        </CustomContainer> */}
       </DefaultContainer>
     </>
   );
