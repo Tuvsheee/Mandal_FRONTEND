@@ -7,6 +7,7 @@ export interface Additional {
   phone2: string;
   facebook: string;
   instagram: string; 
+  kakao: string; 
   whatsapp: string; 
   youtube: string; 
   address: string;

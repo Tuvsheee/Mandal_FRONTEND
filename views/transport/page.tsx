@@ -18,7 +18,7 @@ export default function TransView() {
     ? trans.filter((item) => item.language === locale)
     : [];
 
-  return (
+  return ( 
     <DefaultContainer>
       <TransSwiper showArrow trans={filteredData} />
     </DefaultContainer>

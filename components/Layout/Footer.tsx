@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Link } from "@/navigation";
-import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
 import { useTranslations } from "next-intl";
 import axiosInstance from "@/utils/axios";
 
@@ -9,10 +8,12 @@ interface AdditionalData {
   address: string;
   email: string;
   company: string;
-  phone: string;
+  phone1: string;
+  phone2: string;
   facebook: string;
   instagram: string;
   youtube:string;
+  kakao:string;
 }
 
 const Footer: React.FC = () => {
@@ -61,8 +62,8 @@ const Footer: React.FC = () => {
             <h3 className="text-md font-semibold mb-2">Contact us</h3>
             <ul className="space-y-1">
               <li><Link href="/terms" className="hover:underline"> Email: {additionalData?.email}</Link></li>
-              <li><Link href="/safety" className="hover:underline">Phone: {additionalData?.phone}</Link></li>
-              <li><Link href="/safety" className="hover:underline">Phone: {additionalData?.phone}</Link></li>
+              <li><Link href="/safety" className="hover:underline">Phone: {additionalData?.phone1}</Link></li>
+              <li><Link href="/safety" className="hover:underline">Phone: {additionalData?.phone2}</Link></li>
           
             </ul>
           </div>
@@ -83,6 +84,9 @@ const Footer: React.FC = () => {
             </a>
             <a href={additionalData?.instagram || "#"} target="_blank" rel="noopener noreferrer">
             <img src="/icons/instagram_dark.svg" alt="" className="w-10 h-10" />
+            </a>
+            <a href={additionalData?.kakao || "#"} target="_blank" rel="noopener noreferrer">
+            <img src="/icons/kakao_dark.svg" alt="" className="w-10 h-10" />
             </a>
           </div>
         </div>

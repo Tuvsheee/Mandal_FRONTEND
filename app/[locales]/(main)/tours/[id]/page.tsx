@@ -41,8 +41,9 @@ const TravelDetailScreen = () => {
         title={single.title}
         price={single.price}
         description={single.description}
+        pax={single.pax}
       />
-      <SimpleTravel showArrow travels={filteredTravels} />
+
       <InboundCategoryList />
       <OutboundCategoryList />
     </CustomContainer>

@@ -13,7 +13,7 @@ const useTransStore = create<TransState>((set) => ({
   fetchTrans: async () => {
     try {
       const response = await axiosInstance.get(`/transport`);
-      set({ trans: response.data || [] });
+      set({ trans: response.data.data || [] });
     } catch (error) {
       console.error("Error fetching Trans data:", error);
     }
@@ -23,7 +23,7 @@ const useTransStore = create<TransState>((set) => ({
       const response = await axiosInstance.get(
         `/transport/${id}`
       );
-      return response.data;
+      return response.data.data;
     } catch (error) {
       console.error("Error fetching hostel data:", error);
     }
