@@ -80,37 +80,39 @@ const CarouselSlider = ({ banner, showArrow = false }: Props) => {
   return (
     <div className="relative w-full h-screen">
       <Slider {...settings} className="h-full">
-        {banner?.map((list) => (
-          <div key={list._id} className="relative w-full h-screen">
-            {list.fileType === "image" ? (
-              <img
-                src={`${IMGURL}/${list.file}`}
-                alt=""
-                className="w-full h-screen object-cover"
-              />
-            ) : (
-              <video
-                src={`${IMGURL}/${list.file}`}
-                className="w-full h-screen object-cover"
-                autoPlay
-                loop
-                muted
-              />
-            )}
+        {banner
+          ?.filter((list) => list.type === "home") // ← зөвхөн home төрлийн banner-ууд
+          .map((list) => (
+            <div key={list._id} className="relative w-full h-screen">
+              {list.fileType === "image" ? (
+                <img
+                  src={`${IMGURL}/${list.file}`}
+                  alt=""
+                  className="w-full h-screen object-cover"
+                />
+              ) : (
+                <video
+                  src={`${IMGURL}/${list.file}`}
+                  className="w-full h-screen object-cover"
+                  autoPlay
+                  loop
+                  muted
+                />
+              )}
 
-            <div className="absolute inset-0 flex flex-col justify-center items-center text-white px-4 text-center z-10 ">
-              <h1 className="text-4xl md:text-6xl  drop-shadow-md">
-                {list.title1}
-              </h1>
-              <h2 className="text-3xl md:text-5xl  text-yellow-400 drop-shadow-md mt-2">
-                {list.title2}
-              </h2>
-              <p className="mt-4 text-md md:text-lg max-w-2xl text-white drop-shadow poppins font-p">
-                {list.description}
-              </p>
+              <div className="absolute inset-0 flex flex-col justify-center items-center text-white px-4 text-center z-10 ">
+                <h1 className="text-4xl md:text-6xl  drop-shadow-md">
+                  {list.title1}
+                </h1>
+                <h2 className="text-3xl md:text-5xl  text-yellow-400 drop-shadow-md mt-2">
+                  {list.title2}
+                </h2>
+                <p className="mt-4 text-md md:text-lg max-w-2xl text-white drop-shadow poppins font-p">
+                  {list.description}
+                </p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </Slider>
 
       {/* Left Social Icons */}

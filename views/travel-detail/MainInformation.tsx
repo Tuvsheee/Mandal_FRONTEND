@@ -33,7 +33,7 @@ const MainInformation = ({ travel }: Props) => {
             key={index}
             className={`flex flex-col md:flex-row ${
               isEven ? "md:flex-row" : "md:flex-row-reverse"
-            } items-start md:gap-16`}
+            } items-center md:gap-16`}
           >
             {/* Image */}
             <div className="md:w-1/2 w-full mt-2">
@@ -45,7 +45,7 @@ const MainInformation = ({ travel }: Props) => {
             </div>
 
             {/* Text */}
-            <div className="md:w-1/2 w-full">
+            <div className="w-full md:w-1/2 mt-4 break-words overflow-hidden min-w-0 line-clamp-10">
               <h2 className="text-xl font-bold my-2">
                 {dayText} - {day.direction}
               </h2>

@@ -18,7 +18,7 @@ const TravelDetailScreen = () => {
   const locale = useLocale();
   const { id } = useParams();
   const [single, setSingle] = useState<Travel | null>();
-  const { fetchSingleTravel , travels} = useTravelStore();
+  const { fetchSingleTravel, travels } = useTravelStore();
 
   useEffect(() => {
     fetchSingleTravel(id as string).then((res) => setSingle(res));
@@ -26,14 +26,12 @@ const TravelDetailScreen = () => {
   //   console.log(single);
   if (single == null) {
     return <Loader />;
-  }     
-  const filteredTravels = travels.filter((travel) => travel.language === locale);
+  }
+  const filteredTravels = travels.filter(
+    (travel) => travel.language === locale
+  );
   return (
     <CustomContainer className="px-4 md:px-0">
-      <Heading travel={single!} />
-      <GallerySlider images={single?.gallery || []} />
-      <MainInformation travel={single!} />
-      {/* in this secton booking card componet */}
       <BookingCard
         image={single.cover} // or single.gallery?.[0]
         region={single.category?.name || "Unknown"}
@@ -43,6 +41,10 @@ const TravelDetailScreen = () => {
         description={single.description}
         pax={single.pax}
       />
+      <Heading travel={single!} />
+      <GallerySlider images={single?.gallery || []} />
+      <MainInformation travel={single!} />
+      {/* in this secton booking card componet */}
 
       <InboundCategoryList />
       <OutboundCategoryList />

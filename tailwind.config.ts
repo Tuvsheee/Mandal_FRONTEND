@@ -9,8 +9,16 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      lineClamp: {
+        7: "7",
+        8: "8",
+        9: "9",
+        10: "10",
+        11: "11",
+        12: "12", // ← энд 12-ыг нэмсэн
+      },
       fontFamily: {
-        bebas: ['var(--font-bebas-neue)', 'sans-serif'],
+        bebas: ["var(--font-bebas-neue)", "sans-serif"],
       },
       colors: {
         background: "var(--background)",

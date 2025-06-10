@@ -39,16 +39,11 @@ const Heading = ({ travel }: Props) => {
         })}
         <span className="text-[#555555] text-sm mx-2">{travel?.title}</span>
       </div>
-    
+
       <div className="w-full flex flex-col my-12">
-        <span className="font-semibold text-[30px]">
-          {travel?.title}
-        </span>
-        <span className="text-[20px] mt-2 ">
-          {travel?.description}
-        </span>
+        <span className="font-semibold text-[30px]">{travel?.title}</span>
+        <span className="text-[20px] mt-2 ">{travel?.description}</span>
       </div>
-     
     </div>
   );
 };
