@@ -1,90 +1,80 @@
 "use client";
 import React, { ReactNode } from "react";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import { Travel } from "@/types/travel";
 import { Link } from "@/navigation";
 import { useTranslations } from "next-intl";
-import { useMediaQuery } from "react-responsive";
 import IMGURL from "@/utils/constant";
+import { useMediaQuery } from "react-responsive";
 
 interface Props {
   travels: Travel[];
-  showArrow: boolean;
   banner?: ReactNode;
 }
 
-const SimpleTravel = ({ travels, showArrow, banner }: Props) => {
+const SimpleTravelGrid = ({ travels, banner }: Props) => {
   const t = useTranslations("HomePage");
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
-
-  const settings = {
-    dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 5,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 3000, // 3 seconds
-    responsive: [
-      {
-        breakpoint: 768, // mobile
-        settings: {
-          slidesToShow: 1.5,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
-  
-
+  console.log(travels, "tardf");
   const specialTravels = travels.filter((travel) => travel.isOut === false);
-  console.log(specialTravels)
-  
+
   return (
-    <div className="slider-container w-full flex flex-col items-center mt-12 px-4">
-      {/* Title & Subtitle */}
+    <div className="w-full flex flex-col items-center mt-24 px-4">
+      {/* Title */}
       <div className="text-center mb-8">
-        <h2 className="text-2xl md:text-3xl font-bold">{t("specialPricesTitle")}</h2>
-        <p className="text-2xl md:text-3xl font-bold">{t("specialPricesSubtitle")}</p>
+        <h2 className="text-2xl md:text-3xl font-bold">
+          {t("specialPricesTitle")}
+        </h2>
+        <p className="text-2xl md:text-3xl font-bold">
+          {t("specialPricesSubtitle")}
+        </p>
       </div>
 
       {/* Optional banner */}
-      {banner && banner}
+      {banner && <div className="mb-6 w-full max-w-7xl">{banner}</div>}
 
-      {/* Slider */}
-      <div className="w-full max-w-7xl">
-        <Slider {...settings}>
-          {specialTravels.map((list) => (
-            <Link
-              key={list._id}
-              href={`/tours/${list._id}`}
-              className="px-2 group"
-            >
-              <div className="relative w-full h-[220px] overflow-hidden">
-                <img
-                  src={`${IMGURL}/${list.cover}`}
-                  alt={list.title}
-                  className="w-full h-full object-cover "
-                />
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-black/40" />
-                <div className="absolute top-4 left-0 right-0 p-4 text-white">
-                  <h3 className="text-sm font-bold line-clamp-2">{list.title}</h3>
-                  <p className="text-xs mt-1 line-clamp-3">{list.description}</p>
-                </div>
-                {/* Duration Badge */}
-                <div className="absolute bottom-4 left-4 bg-white text-black text-sm font-semibold px-3 py-1 rounded shadow">
-                  {list.duration}
-                </div>
+      {/* Grid layout */}
+      <div className="grid gap-6 w-full max-w-7xl grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {specialTravels.map((list) => (
+          <Link
+            key={list._id}
+            href={`/tours/${list._id}`}
+            className="group border border-gray-200 rounded-md overflow-hidden shadow-sm hover:shadow-md transition bg-white transform hover:scale-105 duration-1000"
+          >
+            {/* Image */}
+            <div className="relative h-48 w-full">
+              <img
+                src={`${IMGURL}/${list.cover}`}
+                alt={list.title}
+                className="w-full h-full object-cover"
+              />
+
+              {/* Favorite Icon */}
+              <div className="absolute top-2 right-2 z-10">
+                <button className="bg-white/80 rounded-full p-1 text-sm hover:bg-white">
+                  ❤️
+                </button>
               </div>
-            </Link>
-          ))}
-        </Slider>
+            </div>
+
+            {/* Content */}
+            <div className="p-3 flex flex-col gap-1">
+              <h3 className="text-sm font-bold text-gray-800 line-clamp-2">
+                {list.title}
+              </h3>
+              <p className="text-xs text-gray-500 line-clamp-2">
+                {list.description}
+              </p>
+              <div className="text-base font-semibold text-black">
+                {list.price}
+              </div>
+
+              <div className="text-sm text-gray-700">{list.duration}</div>
+            </div>
+          </Link>
+        ))}
       </div>
 
-      {/* More Button */}
+      {/* View All Button */}
       <div className="mt-8">
         <Link
           href="/travel"
@@ -97,4 +87,4 @@ const SimpleTravel = ({ travels, showArrow, banner }: Props) => {
   );
 };
 
-export default SimpleTravel;
+export default SimpleTravelGrid;
