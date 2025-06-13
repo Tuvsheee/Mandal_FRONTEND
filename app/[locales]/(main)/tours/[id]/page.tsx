@@ -34,8 +34,6 @@ const TravelDetailScreen = () => {
     <CustomContainer className="px-4 md:px-0">
       <BookingCard
         image={single.cover} // or single.gallery?.[0]
-        region={single.category?.name || "Unknown"}
-        date="Sep 2025"
         title={single.title}
         price={single.price}
         description={single.description}

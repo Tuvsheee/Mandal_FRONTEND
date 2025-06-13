@@ -6,8 +6,6 @@ import { useTranslations } from "next-intl";
 
 interface BookingCardProps {
   image: string;
-  region: string;
-  date: string;
   title: string;
   price: string | number;
   description: string;
@@ -20,8 +18,6 @@ interface PaxItem {
 
 const BookingCard: React.FC<BookingCardProps> = ({
   image,
-  region,
-  date,
   title,
   price,
   description,
@@ -49,10 +45,7 @@ const BookingCard: React.FC<BookingCardProps> = ({
       {/* Right: Content */}
       <div className="md:w-1/2 w-full flex flex-col justify-between">
         {/* Region and date */}
-        <div className="flex justify-between text-sm font-semibold text-neutral-700 uppercase tracking-wide">
-          <span>{region}</span>
-          <span className="text-neutral-400">{date}</span>
-        </div>
+        <div className="flex justify-between text-sm font-semibold text-neutral-700 uppercase tracking-wide"></div>
 
         {/* Title */}
         <h2 className="text-xl font-bold mt-1">{title}</h2>
@@ -83,9 +76,9 @@ const BookingCard: React.FC<BookingCardProps> = ({
                   pax.map((paxItem, index) => (
                     <td
                       key={index}
-                      className="px-4 py-2 border border-gray-300 text-center"
+                      className="px-4 py-2 border border-gray-300 text-center "
                     >
-                      {paxItem.price}
+                      {Number(paxItem.price).toLocaleString()}
                     </td>
                   ))}
               </tr>

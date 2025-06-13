@@ -15,26 +15,16 @@ const AllTravelScreen = () => {
     fetchTravel();
   }, [fetchTravel]);
 
+  const filteredTravels = travels.filter(
+    (travel) => travel.language === locale
+  );
 
-  const filteredTravels = travels.filter((travel) => travel.language === locale);
-
-  return (    
+  return (
     <DefaultContainer>
-      <div className="w-full ">
-        <video
-          src="/vedio/bg-vedio.mp4"
-          autoPlay
-          muted
-          loop
-          className="w-full h-[100vh] object-cover bg-cover rounded-lg"
-        />
-      </div>
       <CustomContainer>
-        <SimpleTravel showArrow travels={filteredTravels} />
-      
+        <SimpleTravel travels={filteredTravels} />
       </CustomContainer>
     </DefaultContainer>
-    
   );
 };
 
