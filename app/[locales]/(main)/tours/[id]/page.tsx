@@ -43,7 +43,7 @@ const TravelDetailScreen = () => {
       <GallerySlider images={single?.gallery || []} />
       <MainInformation travel={single!} />
       {/* in this secton booking card componet */}
-
+      <div className="my-12">{single.information}</div>
       <InboundCategoryList />
       <OutboundCategoryList />
     </CustomContainer>

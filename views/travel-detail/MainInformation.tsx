@@ -27,7 +27,7 @@ const MainInformation = ({ travel }: Props) => {
           locale === "kr"
             ? `${index + 1} ${t("day")}` // Day after number in Korean
             : `${t("day")} ${index + 1}`; // Day before number in other locales
-
+ 
         return (
           <div
             key={index}

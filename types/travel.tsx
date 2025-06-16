@@ -20,6 +20,7 @@ export interface Travel {
   transportation?: string;
   services?:string;
   sale?:string;
+  information:string;
 }
 
 export interface TravelDay {
