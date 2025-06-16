@@ -67,7 +67,7 @@ const Page = () => {
     <DefaultContainer>
       <Slider {...settings} className="h-full w-screen z-10">
         {banner
-          ?.filter((list) => list.type === "in") // ← зөвхөн home төрлийн banner-ууд
+          ?.filter((list) => list.type === "in") 
           .map((list) => (
             <div key={list._id} className="relative w-full h-screen">
               {list.fileType === "image" ? (

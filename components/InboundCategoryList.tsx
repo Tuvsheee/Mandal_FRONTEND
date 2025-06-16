@@ -19,7 +19,7 @@ const InboundCategoryList = () => {
     (cat) => cat.language === locale && cat.isOut === false
   );
 
-  return (
+  return ( 
     <CustomContainer>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full mt-6">
         {filteredCategories.map((cat) => (
@@ -27,7 +27,9 @@ const InboundCategoryList = () => {
             <div
               className="rounded-full w-[240px] h-[240px] overflow-hidden mx-auto relative flex items-center justify-center text-white text-center shadow-md"
               style={{
-                backgroundImage: `url(${IMGURL}/${cat.photo})`,
+                backgroundImage: `url(${IMGURL}/${encodeURIComponent(
+                  cat.photo
+                )})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}

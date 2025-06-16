@@ -1,13 +1,14 @@
 "use client";
 import React, { useEffect } from "react";
+import { useParams } from "next/navigation";
 import CustomContainer from "@/components/Layout/CustomContainer";
 import { useLocale, useTranslations } from "next-intl";
 import DefaultContainer from "@/components/Layout/DefaultContainer";
-import SimpleTravel from "@/components/home/SimpleTravel";
 import useTravelStore from "@/store/travel";
 import OutTravel from "@/components/home/OutTravel";
 
 const OutTravelScreen = () => {
+  const { id } = useParams();
   const locale = useLocale();
   const t = useTranslations("HomePage");
   const { fetchTravel, travels } = useTravelStore();
@@ -16,10 +17,11 @@ const OutTravelScreen = () => {
     fetchTravel();
   }, [fetchTravel]);
 
+  const filteredTravels = travels.filter(
+    (travel) => travel.language === locale && travel.category._id === id
+  );
 
-  const filteredTravels = travels.filter((travel) => travel.language === locale);
-
-  return (    
+  return (
     <DefaultContainer>
       <div className="w-full ">
         <video
@@ -34,8 +36,7 @@ const OutTravelScreen = () => {
         <OutTravel showArrow travels={filteredTravels} />
       </CustomContainer>
     </DefaultContainer>
-    
   );
 };
 
-export default OutTravelScreen ;
+export default OutTravelScreen;
