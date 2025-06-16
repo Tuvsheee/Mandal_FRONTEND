@@ -78,7 +78,7 @@ const BookingCard: React.FC<BookingCardProps> = ({
                       key={index}
                       className="px-4 py-2 border border-gray-300 text-center "
                     >
-                      {Number(paxItem.price).toLocaleString()}
+                      {paxItem.price}
                     </td>
                   ))}
               </tr>
