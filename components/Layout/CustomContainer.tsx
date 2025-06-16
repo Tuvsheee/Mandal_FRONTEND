@@ -11,7 +11,7 @@ const CustomContainer: React.FC<CustomContainerProps> = ({
 }) => {
   return ( 
     <div
-      className={`w-full flex flex-col items-center max-w-[1400px] cormorant-font flex-grow  px-8 md:px-10 lg:px-20 xl:px-32   ${className}`}
+      className={`w-full flex flex-col items-center max-w-[1400px] mx-auto cormorant-font flex-grow  px-8 md:px-10 lg:px-20 xl:px-32   ${className}`}
     >
       {children}
     </div>

@@ -32,7 +32,7 @@ const BookingCard: React.FC<BookingCardProps> = ({
   const t = useTranslations("HomePage");
 
   return (
-    <div className="flex flex-col md:flex-row gap-4 border-b py-6 w-full mt-24 space-x-2">
+    <div className="flex flex-col md:flex-row gap-4 border-b py-6 w-full items-center mx-auto justify-center mt-24 space-x-2">
       <div className="w-1/2">
         <img
           src={`${IMGURL}/${image}`}
