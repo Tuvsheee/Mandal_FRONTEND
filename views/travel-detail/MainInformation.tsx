@@ -47,7 +47,7 @@ const MainInformation = ({ travel }: Props) => {
             {/* Text */}
             <div className="w-full md:w-1/2 mt-4 break-words overflow-hidden min-w-0 line-clamp-10">
               <h2 className="text-xl font-bold my-2">
-                {dayText} - {day.direction}
+                {dayText}  {day.direction}
               </h2>
               <p className="text-gray-700 whitespace-pre-line">{day.program}</p>
             </div>
