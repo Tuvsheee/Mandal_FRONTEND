@@ -18,7 +18,7 @@ const TravelByCategoryPage = () => {
   }, [fetchTravel]);
 
   const filteredTravels = travels.filter(
-    (travel) => travel.language === locale && travel.category._id === id
+    (travel) => travel.language === locale && travel.category?.["_id"] === id
   );
 
   return (
