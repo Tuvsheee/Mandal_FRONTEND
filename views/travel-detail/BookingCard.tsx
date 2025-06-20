@@ -32,19 +32,20 @@ const BookingCard: React.FC<BookingCardProps> = ({
   const t = useTranslations("HomePage");
 
   return (
-    <div className="flex flex-col md:flex-row gap-4 border-b py-6 w-full items-center mx-auto justify-center mt-24 space-x-2">
-      <div className="w-1/2">
-        <img
-          src={`${IMGURL}/${image}`}
-          alt={title}
-          className="object-cover w-full h-64"
-        />
+    <div className="flex flex-col md:flex-row gap-4 border-b py-6 w-full items-center mx-auto justify-center md:mt-24 mt-20 space-x-2">
+      <div className="md:w-1/2 w-full">
+        {image && (
+          <img
+            src={`${IMGURL}/${image}`}
+            alt={title}
+            className="object-cover w-full h-64"
+          />
+        )}
       </div>
-      <div className="w-[2px] min-h-[16rem] bg-[#c59a3b] py-4"></div>
+      <div className="hidden md:block w-[2px] min-h-[16rem] bg-[#c59a3b] py-4"></div>
+      <div className="md:hidden block w-full min-h-[2px] bg-[#c59a3b] "></div>
 
-      {/* Right: Content */}
       <div className="md:w-1/2 w-full flex flex-col justify-between">
-        {/* Region and date */}
         <div className="flex justify-between text-sm font-semibold text-neutral-700 uppercase tracking-wide"></div>
 
         {/* Title */}
