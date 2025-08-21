@@ -12,7 +12,7 @@
     "to": "Дуусах",
     "search": "Хайх",
     "travel_mongolia": "Монгол аялал",
-    "travel_korea": "Солонгос орны   аялал",
+    "travel_all": "Гадаад аялал",
     "about_jinst": "Жинст Од компанийн тухай",
     "bookingForm": "Захиалгын маягт",
     "fullName": "Бүтэн нэр",
@@ -21,7 +21,7 @@
     "guestNumber": "Зочдын тоо",
     "needPickup": "Таныг тосох уу?",
     "airport": "Нисэх онгоцны буудал",
-    "trainStation": "Галт тэрэгний буудал", 
+    "trainStation": "Галт тэрэгний буудал",
     "busStation": "Автобусны буудал",
     "no": "Үгүй",
     "additionalRequests": "Бусад хүсэлт?",
@@ -32,7 +32,7 @@
     "ticket": "Тасалбар",
     "accommodation": "Байр, сууц",
     "apartment": "Орон сууц",
-    "tours":"Аяллууд",
+    "tours": "Аяллууд",
     "recommended": "Санал болгох аялалууд",
     "recommendedHotel": "Санал болгох буудлууд",
     "contact": "Холбоо барих",
@@ -84,7 +84,7 @@
     "name": "Нэр",
     "yourName": "Таны нэр",
     "yourEmail": "Таны Имэйл",
-    "yourPhone": "Таны утасны дугаар", 
+    "yourPhone": "Таны утасны дугаар",
     "yourContent": "Таны зурвас",
     "dateOfTravelArrival": "Ирэх огноо",
     "dateOfTravelReturn": "Буцах огноо",
@@ -97,7 +97,7 @@
     "book": "Аялал захиалах",
     "formSuccessMessage": "Таны хүсэлт амжилттай илгээгдлээ.",
     "submitting": "Илгээж байна...",
-    "travels":"Аяллууд",
+    "travels": "Аяллууд",
     "travel_schedule": "Аяллын үндсэн хөтөлбөр",
     "address": "Хаяг",
     "phone": "Утас",
@@ -106,11 +106,11 @@
     "overseas_package": "Гадаад багц",
     "save": "Хадгалах",
     "share": "Хуваалцах",
-    "rating":"Үнэлгээ",
-    "advice":"Аяллын зөвлөгөө авах ",
+    "rating": "Үнэлгээ",
+    "advice": "Аяллын зөвлөгөө авах ",
     "facebook": "Фэйсбүүк",
     "instagram": "Инстаграм",
-    "service":"Үйлчилгээ",
+    "service": "Үйлчилгээ",
     "trip_name": "Аяллын нэр",
     "trip_duration": "Аяллын хугацаа",
     "trip_description": "Аяллын мэдээлэл",
@@ -136,7 +136,7 @@
     "Price": "Үнэ",
     "added": "Нэмэгдсэн",
     "tourTips": "Аяллын зөвлөгөө",
-    "freshly":"Шинээр",
+    "freshly": "Шинээр",
     "Services": "Үйлчилгээ",
     "Duration": "Үргэлжлэх хугацаа",
     "insurance": {
@@ -168,7 +168,5 @@
         "button": "Дээд сонголт"
       }
     }
-    
   }
 }
- 

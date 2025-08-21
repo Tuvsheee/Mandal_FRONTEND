@@ -132,7 +132,7 @@ const Header = () => {
                   onMouseLeave={() => setDropdownOpen(false)}
                 >
                   <Link href="/tours/outbound" className="cursor-pointer">
-                    {t("travel_korea")}
+                    {t("travel_all")}
                   </Link>
                 </div>
                 <Link href="/about">{t("about_jinst")}</Link>
@@ -184,7 +184,7 @@ const Header = () => {
               className="text-lg"
               onClick={() => setIsMenuOpen(false)}
             >
-              {t("travel_korea")}
+              {t("travel_all")}
             </Link>
             <Link
               href="/about"
