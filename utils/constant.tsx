@@ -1,4 +1,4 @@
-// const IMGURL = "http://localhost:8001/uploads";
-const IMGURL = "https://api.jinstod.com/uploads";
+const IMGURL =
+  process.env.NEXT_PUBLIC_UPLOAD_BASE_URL || "http://localhost:8001/uploads";
 export default IMGURL;
  

@@ -1,8 +1,8 @@
 "use client";
-import React, { useEffect, useState } from "react";
 import { Link } from "@/navigation";
-import { useTranslations } from "next-intl";
 import axiosInstance from "@/utils/axios";
+import { useTranslations } from "next-intl";
+import React, { useEffect, useState } from "react";
 
 interface AdditionalData {
   address: string;
@@ -33,7 +33,7 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 border-b border-gray-300 pb-6">
           {/* Company Info */}
           <div>
-            <h2 className="text-lg font-semibold mb-2">{additionalData?.company || "Jinst Od Travel"}</h2>
+            <h2 className="text-lg font-semibold mb-2">{additionalData?.company || "Mandal Travel"}</h2>
             <p className="text-sm text-gray-600">A place where nature and adventure unite</p>
           </div>
 
@@ -51,7 +51,7 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="text-md font-semibold mb-2">Pages</h3>
             <ul className="space-y-1">
-              <li><Link href="/contact" className="hover:underline">About Jinst Od</Link></li>
+              <li><Link href="/contact" className="hover:underline">About Mandal</Link></li>
               <li><Link href="/contact" className="hover:underline">Transport</Link></li>
               <li><Link href="/contact" className="hover:underline">Contact</Link></li>
             </ul>

@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useEffect } from "react";
 import CustomContainer from "@/components/Layout/CustomContainer";
-import { useLocale } from "next-intl";
-import useCategoryStore from "@/store/category";
 import { Link } from "@/navigation";
+import useCategoryStore from "@/store/category";
 import IMGURL from "@/utils/constant";
+import { useLocale } from "next-intl";
+import { useEffect } from "react";
 
 const InboundCategoryList = () => {
   const locale = useLocale();
@@ -16,7 +16,7 @@ const InboundCategoryList = () => {
   }, []);
 
   const filteredCategories = data.filter(
-    (cat) => cat.language === locale && cat.isOut === false
+    (cat) => cat.language === locale
   );
 
   return ( 

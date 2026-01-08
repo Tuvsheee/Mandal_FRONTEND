@@ -1,28 +1,25 @@
-import type { Metadata } from "next";
-import "./globals.css";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
-import {   Poppins } from "@next/font/google";
-
+import type { Metadata } from "next";
+import { Poppins } from "next/font/google";
+import "./globals.css";
 
 const poppins = Poppins({
-  weight: ["400","600","700"], 
-  subsets: ["latin"], 
-  display: "swap", // 
+  weight: ["400", "600", "700"],
+  subsets: ["latin"],
+  display: "swap",
 });
-
-
 
 export const metadata: Metadata = {
   title: {
-    default: "Jinst Od Travel LLC",
-    template: "%s | Jinst Od Travel",
+    default: "Mandal Travel LLC",
+    template: "%s | Mandal Travel",
   },
-  description:"Jinst Od Travel LLC - Монгол болон Солонгосын аялал жуулчлалын шилдэг үйлчилгээ үзүүлэгч.",
+  description:
+    "Mandal Travel LLC - Монгол болон Солонгосын аялал жуулчлалын шилдэг үйлчилгээ үзүүлэгч.",
   icons: {
     icon: "/logo.png",
   },
   keywords: [
-    // mongol
     "Монгол аялал",
     "Солонгос аялал",
     "групп аялал",
@@ -39,13 +36,11 @@ export const metadata: Metadata = {
     "Монгол Солонгос жуулчлал",
     "Хөвсгөл нуур аялал",
     "Монголын аяллын компани",
-  
-    // angli
     "Mongolia travel",
     "Korea travel tours",
     "custom tours Mongolia",
     "group travel Mongolia",
-    "Jinst Od Travel",
+    "Mandal Travel",
     "Mongolian travel agency",
     "Huvsgul lake tour",
     "Gobi desert tour",
@@ -69,17 +64,17 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Jinst Od Travel LLC | Аялал жуулчлалын үйлчилгээ",
+    title: "Mandal Travel LLC | Аялал жуулчлалын үйлчилгээ",
     description:
       "Монгол болон Солонгосын үзэсгэлэнт аяллуудыг мэргэжлийн түвшинд зохион байгуулдаг аялал жуулчлалын компани.",
     url: "https://jinstod.mn",
-    siteName: "Jinst Od Travel",
+    siteName: "Mandal Travel",
     images: [
       {
         url: "https://jinstod.mn/logo.png", 
         width: 1200,
         height: 630,
-        alt: "Jinst Od аяллын зураг",
+        alt: "Mandal аяллын зураг",
       },
     ],
     locale: "mn_MN",
@@ -87,7 +82,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Jinst Od Travel | Аяллын үйлчилгээ",
+    title: "Mandal Travel | Аяллын үйлчилгээ",
     description:
       "Монгол, Солонгос чиглэлийн аялал жуулчлалын онцгой үйлчилгээ.",
     images: ["https://jinstod.mn/logo.png"], 

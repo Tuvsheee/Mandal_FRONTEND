@@ -1,13 +1,11 @@
 "use client";
-import axios from "axios";
-import { Raleway } from "@next/font/google";
-import React, { useState, useEffect } from "react";
-import { useTranslations } from "next-intl";
-import CountUp from "react-countup";
+import { Additional } from "@/types/additional";
 import axiosInstance from "@/utils/axios";
 import IMGURL from "@/utils/constant";
+import { useTranslations } from "next-intl";
+import { Raleway } from "next/font/google";
+import React, { useEffect, useState } from "react";
 import DefaultContainer from "../Layout/DefaultContainer";
-import { Additional } from "@/types/additional";
 
 const raleway = Raleway({
   subsets: ["latin"],
@@ -75,7 +73,7 @@ const About: React.FC = () => {
           </div>
 
           {/* Main Titles */}
-          <h1 className="text-3xl md:text-5xl font-bold">JINST OD TRAVEL</h1>
+          <h1 className="text-3xl md:text-5xl font-bold">Mandal TRAVEL</h1>
           <h2 className="text-xl md:text-3xl text-yellow-400 mt-2">
             DISCOVER MONGOLIA’S <span className="italic">UNTAMED BEAUTY</span>
           </h2>

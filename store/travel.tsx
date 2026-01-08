@@ -14,6 +14,7 @@ const useTravelStore = create<TravelState>((set) => ({
     try {
       const response = await axiosInstance.get(`/travel`);
       set({ travels : response.data.data});
+      console.log("Fetched travels:", response.data.data);
     } catch (error) {
       console.error("Error fetching travel data:", error); 
     }

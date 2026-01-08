@@ -1,13 +1,13 @@
 "use client";
-import React, { ReactNode } from "react";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import { Travel } from "@/types/travel";
 import { Link } from "@/navigation";
-import { useTranslations } from "next-intl";
-import { useMediaQuery } from "react-responsive";
+import { Travel } from "@/types/travel";
 import IMGURL from "@/utils/constant";
+import { useTranslations } from "next-intl";
+import { ReactNode } from "react";
+import { useMediaQuery } from "react-responsive";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
 
 interface Props {
   travels: Travel[];
@@ -39,7 +39,7 @@ const OutTravel = ({ travels, showArrow, banner }: Props) => {
   };
   
 
-  const specialTravels = travels.filter((travel) => travel.isOut === true);
+  const specialTravels = travels;
 
   
   return (

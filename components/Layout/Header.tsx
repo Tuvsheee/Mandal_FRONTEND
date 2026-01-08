@@ -1,14 +1,13 @@
 "use client";
-import { Link } from "@/navigation";
-import React, { useEffect, useState } from "react";
-import LocaleSwitcher from "../common/LocalSwitcher";
-import { useLocale } from "next-intl";
-import { useTranslations } from "next-intl";
-import { Additional } from "@/types/additional";
 import { showNotif } from "@/components/Layout/Alert";
-import { X, Send, Menu } from "lucide-react";
+import { Link } from "@/navigation";
+import { Additional } from "@/types/additional";
 import axiosInstance from "@/utils/axios";
 import IMGURL from "@/utils/constant";
+import { AnimatePresence, motion } from "framer-motion";
+import { Menu, Send, X } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import React, { useEffect, useState } from "react";
 
 const Header = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -104,122 +103,172 @@ const Header = () => {
       {/* Desktop Header */}
       <div
         className={`hidden md:block fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-          scrolled
-            ? "bg-white shadow-md border-b border-gray-200"
-            : "bg-white/60 backdrop-blur-md"
-        }`}
+          scrolled ? "bg-[#0f1d13] shadow-[0_8px_24px_rgba(0,0,0,0.35)]" : "bg-[#0f1d13]"
+        } border-b border-white/10 text-white`}
       >
-        <div className="w-full flex flex-col items-center ">
-          {/* Main header content */}
-          <div className="w-full flex justify-center">
-            <div className="flex items-center justify-between  max-w-[1200px] w-full  px-4 md:px-6 flex-col md:flex-row">
-              <div className="flex  items-center w-full md:w-auto">
-                {/* Logo  asdad*/}
-                <Link href="/">
-                  <img
-                    src={`${IMGURL}/${additional?.logo || "default-logo.png"}`}
-                    className="h-20 w-full object-cover"
-                    alt="Logo"
-                  />
-                </Link>
-              </div>
-              {/* Navigation links */}
-              <div className="space-x-4 md:space-x-12 text-center md:text-left  md:mt-0">
-                <Link href="/tours/inbound">{t("travel_mongolia")}</Link>
-                <div
-                  className="inline-block relative"
-                  onMouseEnter={() => setDropdownOpen(true)}
-                  onMouseLeave={() => setDropdownOpen(false)}
-                >
-                  <Link href="/tours/outbound" className="cursor-pointer">
-                    {t("travel_all")}
-                  </Link>
-                </div>
-                <Link href="/about">{t("about_jinst")}</Link>
-                <Link href="/transport">{t("transport")}</Link>
-                <Link href="/book">{t("contact")}</Link>
-              </div>
-              {/* Locale switcher */}
-              <div className="flex items-center gap-4 mt-4 md:mt-0">
-                <LocaleSwitcher />
-              </div>
-            </div>
+        <div className="w-full flex justify-center">
+          <div className="flex items-center justify-between max-w-6xl w-full px-6 py-4">
+            <Link href="/" className="flex items-center gap-3">
+              <img
+                src={`${IMGURL}/${additional?.logo || "default-logo.png"}`}
+                className="h-12 w-auto object-contain"
+                alt="Logo"
+              />
+            </Link>
+
+            <nav className="flex items-center gap-10 text-sm font-semibold tracking-wide uppercase">
+              <Link className="relative pb-1 transition hover:text-white" href="/">
+                Home
+              </Link>
+              <Link className="relative pb-1 transition hover:text-white" href="/about">
+                About us
+              </Link>
+              <Link className="relative pb-1 transition hover:text-white" href="/tours/outbound">
+                Tours
+              </Link>
+              <Link className="relative pb-1 transition hover:text-white" href="/tours/inbound">
+                Destination
+              </Link>
+              <Link className="relative pb-1 transition hover:text-white" href="/faq">
+                FAQ
+              </Link>
+              <Link className="relative pb-1 transition hover:text-white" href="/book">
+                Contact
+              </Link>
+              <Link className="relative pb-1 transition hover:text-white" href="/book">
+                Booking
+              </Link>
+              <Link className="relative pb-1 transition hover:text-white" href="/blog">
+                Blog
+              </Link>
+            </nav>
+
+       
           </div>
         </div>
       </div>
 
       {/* Mobile Header with Hamburger Menu */}
-      <div className="block md:hidden bg-[#F3F3F3] border-b border-black">
+      <div className="block md:hidden bg-[#0f1d13] border-b border-white/10 text-white">
         <div className="flex justify-between items-center px-4 py-3">
           {/* Logo */}
           <Link href="/">
             <img
               src={`${IMGURL}/${additional?.logo}`}
-              className="h-12 object-cover"
+              className="h-10 object-contain"
               alt="Logo"
             />
           </Link>
-          <div className="">
-            <LocaleSwitcher />
-          </div>
+      
           {/* Hamburger Icon */}
-          <button onClick={toggleMenu} className="text-black">
+          <button onClick={toggleMenu} className="text-white">
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
         {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="flex flex-col items-start px-6 bg-white text-black w-full py-4 space-y-4">
-            {/* Main navigation links */}
-            <Link
-              href="/tours/inbound"
-              className="text-lg"
-              onClick={() => setIsMenuOpen(false)}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="flex flex-col items-start overflow-hidden px-6 bg-[#0f1d13] text-white w-full py-4 space-y-4"
             >
-              {t("travel_mongolia")}
-            </Link>
-            <Link
-              href="/tours/outbound"
-              className="text-lg"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {t("travel_all")}
-            </Link>
-            <Link
-              href="/about"
-              className="text-lg"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {t("about_jinst")}
-            </Link>
-            <Link
-              href="/transport"
-              className="text-lg"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {t("transport")}
-            </Link>
-            <Link
-              href="/book"
-              className="text-lg"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {t("contact")}
-            </Link>
-          </div>
-        )}
+              {/* Main navigation links */}
+              <motion.div
+                initial={{ x: -20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: 0.1 }}
+              >
+                <Link
+                  href="/tours/inbound"
+                  className="text-lg"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {t("travel_mongolia")}
+                </Link>
+              </motion.div>
+              <motion.div
+                initial={{ x: -20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: 0.15 }}
+              >
+                <Link
+                  href="/tours/outbound"
+                  className="text-lg"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {t("travel_all")}
+                </Link>
+              </motion.div>
+              <motion.div
+                initial={{ x: -20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: 0.2 }}
+              >
+                <Link
+                  href="/about"
+                  className="text-lg"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {t("about_jinst")}
+                </Link>
+              </motion.div>
+              <motion.div
+                initial={{ x: -20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: 0.25 }}
+              >
+                <Link
+                  href="/transport"
+                  className="text-lg"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {t("transport")}
+                </Link>
+              </motion.div>
+              <motion.div
+                initial={{ x: -20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: 0.3 }}
+              >
+                <Link
+                  href="/book"
+                  className="text-lg"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {t("contact")}
+                </Link>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
-      {isModalOpen && additional && (
-        <div
-          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 md:mx-auto "
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="modal-title"
-          aria-describedby="modal-description"
-        >
-          <div className="bg-[#fff] p-6 sm:p-8 rounded-lg flex flex-col shadow-lg w-full max-w-lg sm:max-w-xl text-black mx-4">
+      <AnimatePresence>
+        {isModalOpen && additional && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 md:mx-auto"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-title"
+            aria-describedby="modal-description"
+            onClick={handleModalClose}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="bg-[#fff] p-6 sm:p-8 rounded-lg flex flex-col shadow-lg w-full max-w-lg sm:max-w-xl text-black mx-4"
+              onClick={(e) => e.stopPropagation()}
+            >
             <div className="flex justify-between mb-5">
               <h2 id="modal-title" className="text-lg sm:text-xl font-bold">
                 {additional?.company || "Company Name"}
@@ -276,9 +325,11 @@ const Header = () => {
                   required
                 ></textarea>
                 {error && <div className="text-red-600 text-sm">{error}</div>}
-                <button
+                <motion.button
                   type="submit"
                   disabled={loading}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                   className={`bg-[#F04748] text-white w-full px-8 py-3 rounded-lg text-lg hover:bg-[#E63939] transition-all flex items-center justify-center ${
                     loading ? "opacity-50 cursor-not-allowed" : ""
                   }`}
@@ -291,12 +342,13 @@ const Header = () => {
                       <Send className="ml-2" />
                     </>
                   )}
-                </button>
+                </motion.button>
               </form>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
+      </AnimatePresence>
     </>
   );
 };

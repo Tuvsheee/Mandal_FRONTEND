@@ -1,13 +1,12 @@
 "use client";
 
-import React from "react";
-import DefaultContainer from "@/components/Layout/DefaultContainer";
 import CustomContainer from "@/components/Layout/CustomContainer";
+import DefaultContainer from "@/components/Layout/DefaultContainer";
 import OutboundCategoryList from "@/components/OutboundCategoryList";
 import useBannerStore from "@/store/banner";
-import { useEffect } from "react";
-import Slider, { Settings } from "react-slick";
 import IMGURL from "@/utils/constant";
+import React, { useEffect } from "react";
+import Slider, { Settings } from "react-slick";
 
 const OutPage = () => {
   const { banner, fetchBanner } = useBannerStore();
@@ -102,7 +101,7 @@ const OutPage = () => {
       <CustomContainer>
         <div className="text-center mt-4 mb-6">
           <h1 className="text-2xl md:text-3xl font-bold">
-            Welcome to the world of JINST OD
+            Welcome to the world of Mandal
           </h1>
         </div>
       </CustomContainer>

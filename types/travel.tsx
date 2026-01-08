@@ -14,7 +14,6 @@ export interface Travel {
   gallery: [string];
   price: string;
   isSpecial: boolean;
-  isOut: boolean;
   createdAt: string;
   pax:any,
   transportation?: string;

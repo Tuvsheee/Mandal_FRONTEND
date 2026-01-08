@@ -1,11 +1,11 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  // baseURL: "http://localhost:8001/api/v1",
-  baseURL: "https://api.jinstod.com/api/v1",
+  baseURL:
+    process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8001/api/v1",
 });
-//https://api.jinstod.com/api/v1
-https: axiosInstance.interceptors.request.use(
+
+axiosInstance.interceptors.request.use(
   (config) => {
     const token: any = localStorage.getItem("token");
     if (token) {
@@ -13,9 +13,7 @@ https: axiosInstance.interceptors.request.use(
     }
     return config;
   },
-  (error) => {
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error)
 );
 
 export default axiosInstance;
