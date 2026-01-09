@@ -2,23 +2,15 @@
 import { Additional } from "@/types/additional";
 import axiosInstance from "@/utils/axios";
 import IMGURL from "@/utils/constant";
-import { useTranslations } from "next-intl";
-import { Raleway } from "next/font/google";
+import { motion } from "framer-motion";
+
 import React, { useEffect, useState } from "react";
 import DefaultContainer from "../Layout/DefaultContainer";
-
-const raleway = Raleway({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-raleway",
-});
-
 
 const About: React.FC = () => {
   const [inView, setInView] = useState(false);
   const [additionalData, setAdditionalData] = useState<Additional | null>(null);
-  const t = useTranslations("HomePage");
-
+  const [activeIndex, setActiveIndex] = useState(0);
   useEffect(() => {
     // Fetch additional data from the API
     axiosInstance
@@ -47,59 +39,59 @@ const About: React.FC = () => {
       }
     };
   }, []);
-// asdsad 
+
+  /* ---------------- TYPEWRITER COMPONENT ---------------- */
+  const TypewriterTitle = ({ text }: { text: string }) => {
+    const [display, setDisplay] = useState("");
+
+    useEffect(() => {
+      setDisplay("");
+      let i = 0;
+      const chars = Array.from(text);
+
+      const interval = setInterval(() => {
+        i++;
+        setDisplay(chars.slice(0, i).join(""));
+        if (i >= chars.length) clearInterval(interval);
+      }, 40);
+
+      return () => clearInterval(interval);
+    }, [text, activeIndex]);
+
+    return (
+      <motion.h1
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.4 }}
+        className="text-xl md:text-2xl font-bold drop-shadow-md"
+      >
+        {display}
+      </motion.h1>
+    );
+  };
+  // asdsad
   return (
     <DefaultContainer>
       <div className="relative w-full h-screen">
         {/* Background Image */}
-        <img
-          src={`${IMGURL}/${additionalData?.aboutCover1}`}
-          alt="Cover"
-          className="w-full h-[100vh] object-cover"
-        />
-
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/30" />
-
-        {/* Centered Content */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4 z-10">
-          {/* Logo */}
-          <div className="mb-4">
-            <img
-              src={`${IMGURL}/${additionalData?.logo}`}
-              alt="Logo"   
-              className="w-24 h-24 md:w-32 md:h-32 object-contain mx-auto rounded-full bg-white p-2"
-            />
-          </div>
-
-          {/* Main Titles */}
-          <h1 className="text-3xl md:text-5xl font-bold">Mandal TRAVEL</h1>
-          <h2 className="text-xl md:text-3xl text-yellow-400 mt-2">
-            DISCOVER MONGOLIA’S <span className="italic">UNTAMED BEAUTY</span>
-          </h2>
-
-          {/* Description */}
-          <p className="mt-4 text-sm md:text-lg max-w-2xl text-white drop-shadow">
-            Journey through endless steppes, majestic mountains, and timeless nomadic culture.
-          </p>
-        </div>
-      </div>
-
-      <div className="w-full max-w-7xl flex my-12 mx-12">
-        <div className="w-1/3">
-          <span className="text-2xl font-bold">{additionalData?.description1}</span>
-        </div>
-        <div className="w-2/3">
-          <span className="text-lg">{additionalData?.description2}</span>
-        </div>
-      </div>
-
-      <div className="w-full ">
-        <img 
-            src={`${IMGURL}/${additionalData?.aboutCover2}`}
+        {additionalData?.aboutCover1 && (
+          <img
+            src={`${IMGURL}/${additionalData.aboutCover1}`}
             alt="Cover"
             className="w-full h-[100vh] object-cover"
           />
+        )}
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/30" />
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4 z-10">
+          <div className="absolute inset-0 flex flex-col justify-end items-start text-white text-left px-32 py-24 z-10 max-w-[800px]">
+            <TypewriterTitle text={additionalData?.description1 || ""} />
+          </div>
+        </div>
+      </div>
+
+      <div className="w-full max-w-4xl flex my-12 mx-12">
+        <span className="text-2xl ">{additionalData?.description2}</span>
       </div>
     </DefaultContainer>
   );

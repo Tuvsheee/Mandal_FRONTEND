@@ -15,15 +15,16 @@ export interface Travel {
   price: string;
   isSpecial: boolean;
   createdAt: string;
-  pax:any,
+  pax: any;
   transportation?: string;
-  services?:string;
-  sale?:string;
-  information:string;
+  services?: string;
+  sale?: string;
+  information: string;
+  highlights?: string[];
 }
 
 export interface TravelDay {
-  direction: string;
+  direction?: string;
   program: string;
-  photos: string;
+  photos: string[];
 }

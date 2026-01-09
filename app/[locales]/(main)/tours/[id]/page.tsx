@@ -6,7 +6,7 @@ import { Travel } from "@/types/travel";
 import { useParams } from "next/navigation";
 import Heading from "@/views/travel-detail/Heading";
 import GallerySlider from "@/components/home/GallerySlider";
-import MainInformation from "@/views/travel-detail/MainInformation";
+import MainInformation from "@/components/travel-detail/MainInformation";
 import Loader from "@/components/common/Loader";
 import BookingCard from "@/views/travel-detail/BookingCard";
 import SimpleTravel from "@/components/home/SimpleTravel";
@@ -42,10 +42,6 @@ const TravelDetailScreen = () => {
       <Heading travel={single!} />
       <GallerySlider images={single?.gallery || []} />
       <MainInformation travel={single!} />
-      {/* in this secton booking card componet */}
-      <div className="my-12">{single.information}</div>
-      <InboundCategoryList />
-      <OutboundCategoryList />
     </CustomContainer>
   );
 };

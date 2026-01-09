@@ -103,11 +103,13 @@ const Header = () => {
       {/* Desktop Header */}
       <div
         className={`hidden md:block fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-          scrolled ? "bg-[#0f1d13] shadow-[0_8px_24px_rgba(0,0,0,0.35)]" : "bg-[#0f1d13]"
+          scrolled
+            ? "bg-[#0f1d13] shadow-[0_8px_24px_rgba(0,0,0,0.35)]"
+            : "bg-[#0f1d13]"
         } border-b border-white/10 text-white`}
       >
         <div className="w-full flex justify-center">
-          <div className="flex items-center justify-between max-w-6xl w-full px-6 py-4">
+          <div className="flex items-center justify-between  w-full px-24 py-4">
             <Link href="/" className="flex items-center gap-3">
               <img
                 src={`${IMGURL}/${additional?.logo || "default-logo.png"}`}
@@ -117,33 +119,55 @@ const Header = () => {
             </Link>
 
             <nav className="flex items-center gap-10 text-sm font-semibold tracking-wide uppercase">
-              <Link className="relative pb-1 transition hover:text-white" href="/">
+              <Link
+                className="relative pb-1 transition hover:text-white"
+                href="/"
+              >
                 Home
               </Link>
-              <Link className="relative pb-1 transition hover:text-white" href="/about">
+              <Link
+                className="relative pb-1 transition hover:text-white"
+                href="/about"
+              >
                 About us
               </Link>
-              <Link className="relative pb-1 transition hover:text-white" href="/tours/outbound">
+              <Link
+                className="relative pb-1 transition hover:text-white"
+                href="/tours/outbound"
+              >
                 Tours
               </Link>
-              <Link className="relative pb-1 transition hover:text-white" href="/tours/inbound">
+              <Link
+                className="relative pb-1 transition hover:text-white"
+                href="/tours/inbound"
+              >
                 Destination
               </Link>
-              <Link className="relative pb-1 transition hover:text-white" href="/faq">
+              <Link
+                className="relative pb-1 transition hover:text-white"
+                href="/faq"
+              >
                 FAQ
               </Link>
-              <Link className="relative pb-1 transition hover:text-white" href="/book">
+              <Link
+                className="relative pb-1 transition hover:text-white"
+                href="/book"
+              >
                 Contact
               </Link>
-              <Link className="relative pb-1 transition hover:text-white" href="/book">
+              <Link
+                className="relative pb-1 transition hover:text-white"
+                href="/book"
+              >
                 Booking
               </Link>
-              <Link className="relative pb-1 transition hover:text-white" href="/blog">
+              <Link
+                className="relative pb-1 transition hover:text-white"
+                href="/blog"
+              >
                 Blog
               </Link>
             </nav>
-
-       
           </div>
         </div>
       </div>
@@ -159,7 +183,7 @@ const Header = () => {
               alt="Logo"
             />
           </Link>
-      
+
           {/* Hamburger Icon */}
           <button onClick={toggleMenu} className="text-white">
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -269,85 +293,85 @@ const Header = () => {
               className="bg-[#fff] p-6 sm:p-8 rounded-lg flex flex-col shadow-lg w-full max-w-lg sm:max-w-xl text-black mx-4"
               onClick={(e) => e.stopPropagation()}
             >
-            <div className="flex justify-between mb-5">
-              <h2 id="modal-title" className="text-lg sm:text-xl font-bold">
-                {additional?.company || "Company Name"}
-              </h2>
-              <button className="text-black " onClick={handleModalClose}>
-                <X />
-              </button>
-            </div>
-            <div className="w-full">
-              <form onSubmit={handleSubmit}>
-                <div className="grid grid-cols-1 sm:grid-cols-1 gap-4 mb-4">
-                  <input
-                    id="name"
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder={t("yourName")}
-                    className="w-full p-3 border rounded-md focus:ring focus:ring-blue-300 bg-[#fff] text-white"
-                    required
-                  />
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-                  <input
-                    id="phone"
-                    name="phone"
-                    type="text"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    placeholder={t("yourPhone")}
-                    className="w-full p-3 border rounded-md mb-4 focus:ring focus:ring-blue-300 bg-[#fff] text-white"
-                    required
-                  />
-                  <input
-                    id="email"
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder={t("yourEmail")}
-                    className="w-full p-3 border rounded-md  mb-4  focus:ring focus:ring-blue-300 bg-[#fff] text-white"
-                    required
-                  />
-                </div>
+              <div className="flex justify-between mb-5">
+                <h2 id="modal-title" className="text-lg sm:text-xl font-bold">
+                  {additional?.company || "Company Name"}
+                </h2>
+                <button className="text-black " onClick={handleModalClose}>
+                  <X />
+                </button>
+              </div>
+              <div className="w-full">
+                <form onSubmit={handleSubmit}>
+                  <div className="grid grid-cols-1 sm:grid-cols-1 gap-4 mb-4">
+                    <input
+                      id="name"
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder={t("yourName")}
+                      className="w-full p-3 border rounded-md focus:ring focus:ring-blue-300 bg-[#fff] text-white"
+                      required
+                    />
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                    <input
+                      id="phone"
+                      name="phone"
+                      type="text"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      placeholder={t("yourPhone")}
+                      className="w-full p-3 border rounded-md mb-4 focus:ring focus:ring-blue-300 bg-[#fff] text-white"
+                      required
+                    />
+                    <input
+                      id="email"
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder={t("yourEmail")}
+                      className="w-full p-3 border rounded-md  mb-4  focus:ring focus:ring-blue-300 bg-[#fff] text-white"
+                      required
+                    />
+                  </div>
 
-                <textarea
-                  id="content"
-                  name="content"
-                  value={formData.content}
-                  onChange={handleChange}
-                  placeholder={t("yourContent")}
-                  className="w-full p-3 border rounded-md mb-4 focus:ring focus:ring-blue-300 bg-[#fff] text-white"
-                  rows={4}
-                  required
-                ></textarea>
-                {error && <div className="text-red-600 text-sm">{error}</div>}
-                <motion.button
-                  type="submit"
-                  disabled={loading}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className={`bg-[#F04748] text-white w-full px-8 py-3 rounded-lg text-lg hover:bg-[#E63939] transition-all flex items-center justify-center ${
-                    loading ? "opacity-50 cursor-not-allowed" : ""
-                  }`}
-                >
-                  {loading ? (
-                    "Илгээж байна..."
-                  ) : (
-                    <>
-                      {t("send")}
-                      <Send className="ml-2" />
-                    </>
-                  )}
-                </motion.button>
-              </form>
-            </div>
+                  <textarea
+                    id="content"
+                    name="content"
+                    value={formData.content}
+                    onChange={handleChange}
+                    placeholder={t("yourContent")}
+                    className="w-full p-3 border rounded-md mb-4 focus:ring focus:ring-blue-300 bg-[#fff] text-white"
+                    rows={4}
+                    required
+                  ></textarea>
+                  {error && <div className="text-red-600 text-sm">{error}</div>}
+                  <motion.button
+                    type="submit"
+                    disabled={loading}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className={`bg-[#F04748] text-white w-full px-8 py-3 rounded-lg text-lg hover:bg-[#E63939] transition-all flex items-center justify-center ${
+                      loading ? "opacity-50 cursor-not-allowed" : ""
+                    }`}
+                  >
+                    {loading ? (
+                      "Илгээж байна..."
+                    ) : (
+                      <>
+                        {t("send")}
+                        <Send className="ml-2" />
+                      </>
+                    )}
+                  </motion.button>
+                </form>
+              </div>
+            </motion.div>
           </motion.div>
-        </motion.div>
-      )}
+        )}
       </AnimatePresence>
     </>
   );

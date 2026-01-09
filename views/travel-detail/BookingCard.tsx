@@ -3,6 +3,8 @@ import React from "react";
 import IMGURL from "@/utils/constant";
 import { useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
+import { motion } from "framer-motion";
+import { Users, DollarSign, BookOpen } from "lucide-react";
 
 interface BookingCardProps {
   image: string;
@@ -32,68 +34,95 @@ const BookingCard: React.FC<BookingCardProps> = ({
   const t = useTranslations("HomePage");
 
   return (
-    <div className="flex flex-col md:flex-row gap-4 border-b py-6 w-full items-center mx-auto justify-center md:mt-24 mt-20 space-x-2">
-      <div className="md:w-1/2 w-full">
-        {image && (
-          <img
-            src={`${IMGURL}/${image}`}
-            alt={title}
-            className="object-cover w-full h-64"
-          />
-        )}
-      </div>
-      <div className="hidden md:block w-[2px] min-h-[16rem] bg-[#c59a3b] py-4"></div>
-      <div className="md:hidden block w-full min-h-[2px] bg-[#c59a3b] "></div>
-
-      <div className="md:w-1/2 w-full flex flex-col justify-between">
-        <div className="flex justify-between text-sm font-semibold text-neutral-700 uppercase tracking-wide"></div>
-
-        {/* Title */}
-        <h2 className="text-xl font-bold mt-1">{title}</h2>
-
-        {/* Price */}
-        <p className="text-lg text-[#c59a3b] font-semibold mt-1">{price}</p>
-
-        {/* Description */}
-        <p className="text-sm text-gray-600 mt-2">{description}</p>
-        <div className="overflow-x-auto">
-          <table className="w-full table-auto border-collapse border border-gray-300 my-2">
-            <thead>
-              <tr className="bg-gray-200">
-                {Array.isArray(pax) &&
-                  pax.map((paxItem, index) => (
-                    <th
-                      key={index}
-                      className="px-4 py-2 border border-gray-300"
-                    >
-                      {paxItem.title}
-                    </th>
-                  ))}
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                {Array.isArray(pax) &&
-                  pax.map((paxItem, index) => (
-                    <td
-                      key={index}
-                      className="px-4 py-2 border border-gray-300 text-center "
-                    >
-                      {paxItem.price}
-                    </td>
-                  ))}
-              </tr>
-            </tbody>
-          </table>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="w-full mt-20 md:mt-24 mb-8"
+    >
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-gradient-to-br from-slate-50 to-slate-100 rounded-2xl overflow-hidden shadow-lg border border-slate-200">
+        {/* Image Section */}
+        <div className="col-span-1 md:col-span-1 overflow-hidden h-80 md:h-auto">
+          {image && (
+            <motion.img
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
+              src={`${IMGURL}/${image}`}
+              alt={title}
+              className="w-full h-full object-cover"
+            />
+          )}
         </div>
-        <button
-          onClick={handleBook}
-          className="mt-4 w-max bg-[#c59a3b] hover:bg-yellow-700 text-white font-semibold px-4 py-2 "
-        >
-          {t("book")}
-        </button>
+
+        {/* Content Section */}
+        <div className="col-span-1 md:col-span-2 flex flex-col justify-between p-6 md:p-8">
+          {/* Title & Description */}
+          <div className="space-y-3 mb-6">
+            <h2 className="text-2xl md:text-3xl font-bold text-slate-900">
+              {title}
+            </h2>
+            <p
+              className="text-slate-600 text-sm md:text-base line-clamp-2"
+              dangerouslySetInnerHTML={{ __html: description }}
+            ></p>
+          </div>
+
+          {/* Price & Pax Info */}
+          <div className="space-y-5">
+            {/* Main Price */}
+            <div className="flex items-center gap-3 p-4 bg-white rounded-lg border border-amber-200 bg-gradient-to-r from-amber-50 to-white">
+              <DollarSign className="w-6 h-6 text-amber-600" />
+              <div>
+                <p className="text-xs text-slate-600 uppercase tracking-wide font-semibold">
+                  {"Price"}
+                </p>
+                <p className="text-2xl font-bold text-slate-900">{price}</p>
+              </div>
+            </div>
+
+            {/* Pax Table */}
+            {Array.isArray(pax) && pax.length > 0 && (
+              <div className="space-y-2">
+                <div className="flex items-center gap-2 text-sm font-semibold text-slate-700 uppercase tracking-wide mb-3">
+                  <Users className="w-4 h-4 text-amber-600" />
+                  {"Per Person Pricing"}
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-1 gap-3">
+                  {pax.map((paxItem, index) => (
+                    <motion.div
+                      key={index}
+                      whileHover={{ translateX: 4 }}
+                      className="flex justify-between items-center p-3 bg-white rounded-lg border border-slate-200 hover:border-amber-300 transition"
+                    >
+                      <span className="text-sm font-medium text-slate-700">
+                        {paxItem.title}
+                      </span>
+                      <span className="text-base font-bold text-amber-600">
+                        ${paxItem.price}
+                      </span>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Booking Button */}
+            <motion.button
+              whileHover={{
+                scale: 1.02,
+                boxShadow: "0 12px 24px rgba(217, 119, 6, 0.3)",
+              }}
+              whileTap={{ scale: 0.98 }}
+              onClick={handleBook}
+              className="w-full mt-4 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-bold py-3 px-6 rounded-lg transition-all flex items-center justify-center gap-2 shadow-md"
+            >
+              <BookOpen className="w-5 h-5" />
+              {t("book") || "Book Now"}
+            </motion.button>
+          </div>
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

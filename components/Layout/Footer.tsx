@@ -1,8 +1,17 @@
 "use client";
 import { Link } from "@/navigation";
 import axiosInstance from "@/utils/axios";
+import IMGURL from "@/utils/constant";
 import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Facebook,
+  Instagram,
+  Youtube,
+} from "lucide-react";
 
 interface AdditionalData {
   address: string;
@@ -12,13 +21,16 @@ interface AdditionalData {
   phone2: string;
   facebook: string;
   instagram: string;
-  youtube:string;
-  kakao:string;
+  youtube: string;
+  kakao: string;
+  logo?: string;
 }
 
 const Footer: React.FC = () => {
   const t = useTranslations("HomePage");
-  const [additionalData, setAdditionalData] = useState<AdditionalData | null>(null);
+  const [additionalData, setAdditionalData] = useState<AdditionalData | null>(
+    null
+  );
 
   useEffect(() => {
     axiosInstance
@@ -28,66 +40,203 @@ const Footer: React.FC = () => {
   }, []);
 
   return (
-    <footer className="bg-[#f6f6f6] text-[#1b1b1b] text-sm mt-8">
-      <div className="max-w-screen-xl mx-auto px-4 py-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 border-b border-gray-300 pb-6">
+    <footer className="bg-[#0f1d13] text-white border-t border-white/10">
+      {/* Main Footer Content */}
+      <div className="max-w-6xl mx-auto px-6 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Company Info */}
-          <div>
-            <h2 className="text-lg font-semibold mb-2">{additionalData?.company || "Mandal Travel"}</h2>
-            <p className="text-sm text-gray-600">A place where nature and adventure unite</p>
+          <div className="space-y-4">
+            {additionalData?.logo && (
+              <img
+                src={`${IMGURL}/${additionalData.logo}`}
+                alt="Logo"
+                className="h-10 w-auto object-contain mb-4"
+              />
+            )}
+            <h2 className="text-lg font-semibold uppercase tracking-wide">
+              {additionalData?.company || "Mandal Travel"}
+            </h2>
+            <p className="text-sm text-white/60 leading-relaxed">
+              Authentic travel experiences connecting you with the world's most
+              captivating destinations.
+            </p>
           </div>
 
-          {/* About Us */}
-          <div>
-            <h3 className="text-md font-semibold mb-2">Travels</h3>
-            <ul className="space-y-1">
-              <li><Link href="/about" className="hover:underline">Authentic Mongolia Travel</Link></li>
-              <li><Link href="/tips" className="hover:underline">Discover Korea Travel</Link></li>
-            
+          {/* Quick Links */}
+          <div className="space-y-4">
+            <h3 className="text-sm font-semibold uppercase tracking-wide">
+              Tours
+            </h3>
+            <ul className="space-y-2.5">
+              <li>
+                <Link
+                  href="/tours/inbound"
+                  className="text-white/70 hover:text-white transition text-sm"
+                >
+                  Mongolia Tours
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/tours/outbound"
+                  className="text-white/70 hover:text-white transition text-sm"
+                >
+                  International Tours
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/blog"
+                  className="text-white/70 hover:text-white transition text-sm"
+                >
+                  Travel Tips
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* FAQ */}
-          <div>
-            <h3 className="text-md font-semibold mb-2">Pages</h3>
-            <ul className="space-y-1">
-              <li><Link href="/contact" className="hover:underline">About Mandal</Link></li>
-              <li><Link href="/contact" className="hover:underline">Transport</Link></li>
-              <li><Link href="/contact" className="hover:underline">Contact</Link></li>
+          {/* Company Pages */}
+          <div className="space-y-4">
+            <h3 className="text-sm font-semibold uppercase tracking-wide">
+              Company
+            </h3>
+            <ul className="space-y-2.5">
+              <li>
+                <Link
+                  href="/about"
+                  className="text-white/70 hover:text-white transition text-sm"
+                >
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/contact"
+                  className="text-white/70 hover:text-white transition text-sm"
+                >
+                  Contact
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/faq"
+                  className="text-white/70 hover:text-white transition text-sm"
+                >
+                  FAQ
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/book"
+                  className="text-white/70 hover:text-white transition text-sm"
+                >
+                  Booking
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Information */}
-          <div>
-            <h3 className="text-md font-semibold mb-2">Contact us</h3>
-            <ul className="space-y-1">
-              <li><Link href="/terms" className="hover:underline"> Email: {additionalData?.email}</Link></li>
-              <li><Link href="/safety" className="hover:underline">Phone: {additionalData?.phone1}</Link></li>
-              <li><Link href="/safety" className="hover:underline">Phone: {additionalData?.phone2}</Link></li>
-          
+          {/* Contact Info */}
+          <div className="space-y-4">
+            <h3 className="text-sm font-semibold uppercase tracking-wide">
+              Get In Touch
+            </h3>
+            <ul className="space-y-3">
+              <li className="flex items-start gap-3 text-sm">
+                <Mail
+                  size={16}
+                  className="text-white/60 mt-0.5 flex-shrink-0"
+                />
+                <a
+                  href={`mailto:${additionalData?.email}`}
+                  className="text-white/70 hover:text-white transition break-all"
+                >
+                  {additionalData?.email}
+                </a>
+              </li>
+              <li className="flex items-start gap-3 text-sm">
+                <Phone
+                  size={16}
+                  className="text-white/60 mt-0.5 flex-shrink-0"
+                />
+                <div className="flex flex-col gap-1">
+                  {additionalData?.phone1 && (
+                    <a
+                      href={`tel:${additionalData.phone1}`}
+                      className="text-white/70 hover:text-white transition"
+                    >
+                      {additionalData.phone1}
+                    </a>
+                  )}
+                  {additionalData?.phone2 && (
+                    <a
+                      href={`tel:${additionalData.phone2}`}
+                      className="text-white/70 hover:text-white transition"
+                    >
+                      {additionalData.phone2}
+                    </a>
+                  )}
+                </div>
+              </li>
+              <li className="flex items-start gap-3 text-sm">
+                <MapPin
+                  size={16}
+                  className="text-white/60 mt-0.5 flex-shrink-0"
+                />
+                <span className="text-white/70">
+                  {additionalData?.address || "Mongolia"}
+                </span>
+              </li>
             </ul>
           </div>
         </div>
 
-        {/* Bottom Line */}
-        <div className="flex flex-col md:flex-row justify-between items-center mt-6 text-sm">
-          <p className="text-gray-600 mb-4 md:mb-0">
-            {additionalData?.address || "Jinstod travel Mongolia 17 khoroo 65 bair 24 toot"}
+        {/* Divider */}
+        <div className="border-t border-white/10 pt-8"></div>
+
+        {/* Bottom Section */}
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+          {/* Copyright */}
+          <p className="text-sm text-white/50">
+            © {new Date().getFullYear()}{" "}
+            {additionalData?.company || "Mandal Travel"}. All rights reserved.
           </p>
-          <div className="flex space-x-4">
-            <a href={additionalData?.youtube || "#"} target="_blank" rel="noopener noreferrer">
-              <img src="/icons/youtube_dark.svg" alt="" className="w-10 h-10" />
-           
-            </a>
-            <a href={additionalData?.facebook || "#"} target="_blank" rel="noopener noreferrer">
-            <img src="/icons/facebook_dark.svg" alt="" className="w-10 h-10" />
-            </a>
-            <a href={additionalData?.instagram || "#"} target="_blank" rel="noopener noreferrer">
-            <img src="/icons/instagram_dark.svg" alt="" className="w-10 h-10" />
-            </a>
-            <a href={additionalData?.kakao || "#"} target="_blank" rel="noopener noreferrer">
-            <img src="/icons/kakao_dark.svg" alt="" className="w-10 h-10" />
-            </a>
+
+          {/* Social Links */}
+          <div className="flex items-center gap-4">
+            {additionalData?.facebook && (
+              <a
+                href={additionalData.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition text-white/70 hover:text-white"
+                aria-label="Facebook"
+              >
+                <Facebook size={18} />
+              </a>
+            )}
+            {additionalData?.instagram && (
+              <a
+                href={additionalData.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition text-white/70 hover:text-white"
+                aria-label="Instagram"
+              >
+                <Instagram size={18} />
+              </a>
+            )}
+            {additionalData?.youtube && (
+              <a
+                href={additionalData.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition text-white/70 hover:text-white"
+                aria-label="YouTube"
+              >
+                <Youtube size={18} />
+              </a>
+            )}
           </div>
         </div>
       </div>
