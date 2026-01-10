@@ -8,8 +8,8 @@ const robots = (): MetadataRoute.Robots => {
         allow: "/",
       },
     ],
-    sitemap: "https://jinstod.com/sitemap.xml",
-    host: "https://jinstod.com",
+    sitemap: "https://mandaltoursmongolia.com/sitemap.xml",
+    host: "https://mandaltoursmongolia.com",
   };
 };
 

@@ -51,16 +51,16 @@ export const metadata: Metadata = {
     "Gobi desert adventure",
     "tailor-made Mongolian tours",
     "domestic Mongolia tours",
-    "Mongolian nature travel"
+    "Mongolian nature travel",
   ],
-  
-  metadataBase: new URL("https://jinstod.com"), 
+
+  metadataBase: new URL("https://mandaltoursmongolia.com"),
   alternates: {
-    canonical: "https://jinstod.com",
+    canonical: "https://mandaltoursmongolia.com",
     languages: {
-      "mn": "https://jinstod.com/mn",
-      "kr": "https://jinstod.com/kr",
-      "en": "https://jinstod.com/en",
+      mn: "https://mandaltoursmongolia.com/mn",
+      kr: "https://mandaltoursmongolia.com/kr",
+      en: "https://mandaltoursmongolia.com/en",
     },
   },
   openGraph: {
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     siteName: "Mandal Travel",
     images: [
       {
-        url: "https://jinstod.mn/logo.png", 
+        url: "https://jinstod.mn/logo.png",
         width: 1200,
         height: 630,
         alt: "Mandal аяллын зураг",
@@ -85,12 +85,15 @@ export const metadata: Metadata = {
     title: "Mandal Travel | Аяллын үйлчилгээ",
     description:
       "Монгол, Солонгос чиглэлийн аялал жуулчлалын онцгой үйлчилгээ.",
-    images: ["https://jinstod.mn/logo.png"], 
+    images: ["https://jinstod.mn/logo.png"],
   },
- 
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="mn" className={` ${poppins.className}`}>
       <head>
