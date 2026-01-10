@@ -70,26 +70,26 @@ const Footer: React.FC = () => {
             <ul className="space-y-2.5">
               <li>
                 <Link
-                  href="/tours/inbound"
-                  className="text-white/70 hover:text-white transition text-sm"
-                >
-                  Mongolia Tours
-                </Link>
-              </li>
-              <li>
-                <Link
                   href="/tours/outbound"
                   className="text-white/70 hover:text-white transition text-sm"
                 >
-                  International Tours
+                  Tours
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/blog"
+                  href="/tours/inbound?type=destination"
                   className="text-white/70 hover:text-white transition text-sm"
                 >
-                  Travel Tips
+                  Destination
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/tours/inbound?type=blog"
+                  className="text-white/70 hover:text-white transition text-sm"
+                >
+                  Blog
                 </Link>
               </li>
             </ul>
@@ -111,7 +111,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <Link
-                  href="/contact"
+                  href="/tours/inbound?type=contact"
                   className="text-white/70 hover:text-white transition text-sm"
                 >
                   Contact
@@ -119,7 +119,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <Link
-                  href="/faq"
+                  href="/tours/inbound?type=faq"
                   className="text-white/70 hover:text-white transition text-sm"
                 >
                   FAQ
@@ -127,7 +127,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <Link
-                  href="/book"
+                  href="/tours/inbound?type=booking"
                   className="text-white/70 hover:text-white transition text-sm"
                 >
                   Booking
