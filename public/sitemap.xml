@@ -1,61 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.monmag.mn</loc>
+    <loc>https://mandaltoursmongolia.com</loc>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.monmag.mn/about</loc>
+    <loc>https://mandaltoursmongolia.com/en/about</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.monmag.mn/accommodation</loc>
+    <loc>https://mandaltoursmongolia.com/en/accommodation</loc>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.monmag.mn/accommodation/apartments</loc>
+    <loc>https://mandaltoursmongolia.com/en/accommodation/apartments</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.monmag.mn/accommodation/guesthouse</loc>
+    <loc>https://mandaltoursmongolia.com/en/accommodation/guesthouse</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.monmag.mn/accommodation/hotels</loc>
+    <loc>https://mandaltoursmongolia.com/en/accommodation/hotels</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.monmag.mn/book</loc>
+    <loc>https://mandaltoursmongolia.com/en/book</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.monmag.mn/tips</loc>
+    <loc>https://mandaltoursmongolia.com/en/tips</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.monmag.mn/tours</loc>
+    <loc>https://mandaltoursmongolia.com/en/tours</loc>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.monmag.mn/tours/center</loc>
+    <loc>https://mandaltoursmongolia.com/en/tours/center</loc>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.monmag.mn/tours/govi</loc>
+    <loc>https://mandaltoursmongolia.com/en/tours/govi</loc>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.monmag.mn/tours/huvsgul</loc>
+    <loc>https://mandaltoursmongolia.com/en/tours/huvsgul</loc>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.monmag.mn/tours/special</loc>
+    <loc>https://mandaltoursmongolia.com/en/tours/special</loc>
     <priority>0.9</priority>
   </url>
   
 
   <url>
-    <loc>https://www.monmag.mn/transport</loc>
+    <loc>https://mandaltoursmongolia.com/en/transport</loc>
     <priority>0.8</priority>
   </url>
 
