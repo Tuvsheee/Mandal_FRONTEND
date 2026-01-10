@@ -1,5 +1,5 @@
-import React from 'react';
-import About from '@/components/home/About';  // Adjust import based on your folder structure
+import React from "react";
+import About from "@/components/home/About"; // Adjust import based on your folder structure
 
 const AboutPage: React.FC = () => {
   return <About />;

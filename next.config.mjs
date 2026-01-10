@@ -29,6 +29,11 @@ const nextConfig = {
         hostname: "mandaltoursmongolia.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "api.mandaltoursmongolia.com",
+        pathname: "/uploads/**",
+      },
     ],
   },
 };

@@ -92,15 +92,17 @@ const About: React.FC = () => {
         </div>
       </div>
       {/* Background Image */}
-
-      <div className="w-full max-w-4xl flex my-12 mx-12">
-        <span
-          className="text-2xl "
-          dangerouslySetInnerHTML={{
-            __html: additionalData?.description2 || "",
-          }}
-        ></span>
+      <div className="flex justify-center">
+        <div className="w-full max-w-4xl flex my-12 mx-12">
+          <span
+            className="text-2xl "
+            dangerouslySetInnerHTML={{
+              __html: additionalData?.description2 || "",
+            }}
+          ></span>
+        </div>
       </div>
+
       <div className="absolute -left-80 top-[1200px] w-1/2 h-full z-0 opacity-35">
         <Image
           src="/back1.avif"
