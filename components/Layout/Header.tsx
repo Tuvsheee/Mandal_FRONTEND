@@ -7,12 +7,15 @@ import IMGURL from "@/utils/constant";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, Send, X } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
+import { usePathname, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const Header = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const t = useTranslations("HomePage");
   const locale = useLocale();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -109,7 +112,7 @@ const Header = () => {
         } border-b border-white/10 text-white`}
       >
         <div className="w-full flex justify-center">
-          <div className="flex items-center justify-between  w-full px-24 py-4">
+          <div className="flex items-center justify-between  w-full px-12 py-4">
             <Link href="/" className="flex items-center gap-3">
               <img
                 src={`${IMGURL}/${additional?.logo || "default-logo.png"}`}
@@ -118,52 +121,87 @@ const Header = () => {
               />
             </Link>
 
-            <nav className="flex items-center gap-10 text-sm font-semibold tracking-wide uppercase">
+            <nav className="flex items-center gap-10 text-xs font-semibold tracking-wide">
               <Link
-                className="relative pb-1 transition hover:text-white"
+                className={`relative pb-1 transition hover:text-white hover:underline ${
+                  pathname === "/" ? "" : "underline"
+                }`}
                 href="/"
               >
                 Home
               </Link>
               <Link
-                className="relative pb-1 transition hover:text-white"
+                className={`relative pb-1 transition hover:text-white hover:underline ${
+                  pathname.includes("/about") ? "" : "underline"
+                }`}
                 href="/about"
               >
                 About us
               </Link>
               <Link
-                className="relative pb-1 transition hover:text-white"
-                href="/tours/outbound"
+                className={`relative pb-1 transition hover:text-white hover:underline ${
+                  pathname.includes("/tours/inbound") &&
+                  searchParams?.get("type") === "tours"
+                    ? ""
+                    : "underline"
+                }`}
+                href="/tours/inbound?type=tours"
               >
                 Tours
               </Link>
               <Link
-                className="relative pb-1 transition hover:text-white"
-                href="/tours/inbound"
+                className={`relative pb-1 transition hover:text-white hover:underline ${
+                  pathname.includes("/tours/inbound") &&
+                  (!searchParams?.get("type") ||
+                    searchParams?.get("type") === "destination")
+                    ? ""
+                    : "underline"
+                }`}
+                href="/tours/inbound?type=destination"
               >
                 Destination
               </Link>
               <Link
-                className="relative pb-1 transition hover:text-white"
-                href="/faq"
+                className={`relative pb-1 transition hover:text-white hover:underline ${
+                  pathname.includes("/tours/inbound") &&
+                  searchParams?.get("type") === "faq"
+                    ? ""
+                    : "underline"
+                }`}
+                href="/tours/inbound?type=faq"
               >
                 FAQ
               </Link>
               <Link
-                className="relative pb-1 transition hover:text-white"
-                href="/book"
+                className={`relative pb-1 transition hover:text-white hover:underline ${
+                  pathname.includes("/tours/inbound") &&
+                  searchParams?.get("type") === "contact"
+                    ? ""
+                    : "underline"
+                }`}
+                href="/tours/inbound?type=contact"
               >
                 Contact
               </Link>
               <Link
-                className="relative pb-1 transition hover:text-white"
-                href="/book"
+                className={`relative pb-1 transition hover:text-white hover:underline ${
+                  pathname.includes("/tours/inbound") &&
+                  searchParams?.get("type") === "booking"
+                    ? ""
+                    : "underline"
+                }`}
+                href="/tours/inbound?type=booking"
               >
                 Booking
               </Link>
               <Link
-                className="relative pb-1 transition hover:text-white"
-                href="/blog"
+                className={`relative pb-1 transition hover:text-white hover:underline ${
+                  pathname.includes("/tours/inbound") &&
+                  searchParams?.get("type") === "blog"
+                    ? ""
+                    : "underline"
+                }`}
+                href="/tours/inbound?type=blog"
               >
                 Blog
               </Link>

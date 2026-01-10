@@ -15,9 +15,14 @@ import "slick-carousel/slick/slick.css";
 interface Props {
   banner: Banner[];
   showArrow?: boolean;
+  variant?: "home" | "tours";
 }
 
-const CarouselSlider = ({ banner, showArrow = false }: Props) => {
+const CarouselSlider = ({
+  banner,
+  showArrow = false,
+  variant = "home",
+}: Props) => {
   const [additional, setAdditional] = useState<Additional | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -27,8 +32,6 @@ const CarouselSlider = ({ banner, showArrow = false }: Props) => {
       .then((res) => setAdditional(res.data.data))
       .catch((err) => console.error(err));
   }, []);
-
-  const slides = banner?.filter((b) => b.type === "home") || [];
 
   const settings: Settings = {
     dots: true,
@@ -74,7 +77,11 @@ const CarouselSlider = ({ banner, showArrow = false }: Props) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.4 }}
-        className="text-4xl md:text-7xl font-bold drop-shadow-md"
+        className={
+          variant === "home"
+            ? "text-4xl md:text-7xl font-bold drop-shadow-md"
+            : "text-lg md:text-2xl font-bold "
+        }
       >
         {display}
       </motion.h1>
@@ -85,7 +92,7 @@ const CarouselSlider = ({ banner, showArrow = false }: Props) => {
   return (
     <div className="relative w-full h-screen">
       <Slider {...settings} className="h-full">
-        {slides.map((slide) => (
+        {banner.map((slide) => (
           <div key={slide._id} className="relative w-full h-screen">
             {slide.fileType === "image" ? (
               <img
@@ -104,12 +111,14 @@ const CarouselSlider = ({ banner, showArrow = false }: Props) => {
             )}
 
             {/* OVERLAY TEXT */}
-            <div className="absolute inset-0 flex flex-col justify-center items-start text-white text-left px-32 z-10 max-w-44">
-           
-
-                 <TypewriterTitle text={slide.title1} />
-
-      
+            <div
+              className={`absolute inset-0 flex flex-col  items-start text-white text-left px-32 z-10 ${
+                variant === "home"
+                  ? "max-w-44 justify-center"
+                  : "max-w-[700px] justify-end py-24"
+              }`}
+            >
+              <TypewriterTitle text={slide.title1} />
             </div>
           </div>
         ))}

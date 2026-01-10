@@ -13,21 +13,17 @@ export default function Home() {
 
   const heroBanner = banner.find((b) => b.type === "home");
 
-  const filteredTravels = travels.filter((travel) => travel.language );
+  const filteredTravels = travels.filter((travel) => travel.language);
 
   useEffect(() => {
     fetchBanner();
     fetchTravel();
   }, [fetchBanner, fetchTravel]);
 
-
-
   return (
     <div className="w-full bg-slate-950 text-white">
       <section className="relative isolate overflow-hidden">
-        <CarouselSlider showArrow banner={banner} />
-
-
+        <CarouselSlider showArrow banner={banner} variant="home" />
       </section>
 
       <section className="w-full bg-white text-slate-900">
@@ -45,13 +41,10 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-              <p className="text-xl  text-black text-center">
-                {heroBanner?.description || ""}
-              </p>
-       
-    
+            <p className="text-xl  text-black text-center">
+              {heroBanner?.description || ""}
+            </p>
           </motion.div>
-
         </motion.div>
 
         <HomeTravelShowcase travels={filteredTravels} />

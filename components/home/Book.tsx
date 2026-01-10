@@ -3,177 +3,128 @@ import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import useAdditionalStore from "@/store/addtional";
 import axiosInstance from "@/utils/axios";
+import { MapPin, Phone, Mail } from "lucide-react";
 
 export default function CustomTravelPage() {
   const t = useTranslations("HomePage");
-  
+  const { data, fetchData } = useAdditionalStore();
+
   const [formData, setFormData] = useState({
-    title: "Ноён.",
     name: "",
     email: "",
-    startDate: "",
-    endDate: "",
     content: "",
-    adultNumber: 0,
-    kidsNumber: 0,
-    phone: 0,
   });
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
 
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  if (!data) return null;
+  const info = data;
+
   const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setError("");
-    setSuccess(false);
-
     try {
       await axiosInstance.post("/feedback", formData);
       setSuccess(true);
-    } catch (err) {
-      setError("Form submission failed. Please try again.");
-      console.error(err);
+      setFormData({ name: "", email: "", content: "" });
     } finally {
       setLoading(false);
     }
   };
-  const { data, fetchData } = useAdditionalStore();
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-  if (!data) return <p>Loading...</p>; 
-
-
-  const info = data; // safely access the first entry
 
   return (
-    <div className="max-w-6xl mx-auto md:mx-12 md:my-24 my-10 px-4 md:px-0">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-        {/* FORM SECTION */}
-        <div className="w-full">
-          <h3 className="text-lg font-bold uppercase text-[#1a1a1a] border-b border-[#c59a3b] pb-2 mb-6">
-            {t("whereWouldYouLikeToTravel") || "Where would you like"}
-          </h3>
-
+    <div className="max-w-6xl mx-auto px-4 my-16">
+      <div className="grid md:grid-cols-2 gap-10">
+        {/* LEFT FORM */}
+        <div className="bg-[#f1f1f1] rounded-xl p-6">
           <form onSubmit={handleSubmit} className="space-y-4">
-            <select
-              name="title"
-              value={formData.title}
-              onChange={handleChange}
-              className="w-full border border-gray-300 p-2 rounded text-gray-700"
-            >
-              <option value="Ноён.">{t("mr") || "Mr."}</option>
-              <option value="Хатагтай.">{t("ms") || "Ms."}</option>
-            </select>
+            <div>
+              <label className="text-sm font-medium">Name</label>
+              <input
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                className="w-full mt-1 p-3 rounded bg-white"
+              />
+            </div>
 
-            <input
-              type="text"
-              name="name"
-              placeholder={t("yourName") || "Your Name"}
-              value={formData.name}
-              onChange={handleChange}
-              className="w-full border border-gray-300 p-2 rounded"
-            />
+            <div>
+              <label className="text-sm font-medium">Email</label>
+              <input
+                name="email"
+                type="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full mt-1 p-3 rounded bg-white"
+              />
+            </div>
 
-            <input
-              type="email"
-              name="email"
-              placeholder={t("yourEmail") || "Your Email"}
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full border border-gray-300 p-2 rounded"
-            />
-
-            <input
-              type="number"
-              name="phone"
-              placeholder={t("yourPhone") || "Subject"}
-              value={formData.phone}
-              onChange={handleChange}
-              className="w-full border border-gray-300 p-2 rounded"
-            />
-
-            <textarea
-              name="content"
-              placeholder={t("yourLetter") || "Message"}
-              value={formData.content}
-              onChange={handleChange}
-              className="w-full border border-gray-300 p-2 rounded min-h-[120px]"
-            />
+            <div>
+              <label className="text-sm font-medium">Message</label>
+              <textarea
+                name="content"
+                value={formData.content}
+                onChange={handleChange}
+                className="w-full mt-1 p-3 rounded bg-white min-h-[200px]"
+              />
+            </div>
 
             <button
-              type="submit"
               disabled={loading}
-              className="bg-[#c59a3b] hover:bg-yellow-700 text-white font-semibold py-2 px-4 w-full rounded"
+              className="w-full bg-[#0f2a1d] text-white py-1 rounded-xs rounded-lg font-semibold"
             >
-              {loading ? "Sending..." : "Send Request"}
+              {loading ? "Sending..." : "Submit"}
             </button>
-            {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
+
             {success && (
-              <p className="text-green-600 text-sm mb-2">
-                {t("formSuccessMessage") ||
-                  "Your request was sent successfully!"}
+              <p className="text-green-600 text-sm">
+                Message sent successfully
               </p>
             )}
           </form>
         </div>
 
-        {/* CONTACT SECTION */}
-        <div className="text-sm text-gray-800 leading-relaxed space-y-6">
-          <div>
-            <h4 className="text-base font-semibold border-b pb-1 mb-2">
-              About us
-            </h4>
-            <p>{info?.description1 || "No description available."}</p>
+        {/* RIGHT CONTACT */}
+        <div className="space-y-5">
+          {/* MAP */}
+          <div className="rounded-xl overflow-hidden h-[260px]">
+            <iframe
+              src="https://www.google.com/maps?q=Mandal%20Tours%20Mongolia&output=embed"
+              className="w-full h-full border-0"
+              loading="lazy"
+            />
           </div>
 
-          <div>
-            <h4 className="text-base font-semibold border-b pb-1 mb-2">
-              Contact us
-            </h4>
-            {info?.phone1 && (
-              <>
-                <p>Tel: {info.phone1}</p>
-              </>
-            )}
-            {info?.phone2 && (
-              <>
-                <p>Tel: {info.phone2}</p>
-              </>
-            )}
-            {info?.email && (
-              <p>
-                Email:{" "}
-                <a href={`mailto:${info.email}`} className="text-[#c59a3b]">
-                  {info.email}
-                </a>
-              </p>
-            )}
-            {info?.address && <p>Address: {info.address}</p>}
-            {info?.whatsapp && <p>WhatsApp: {info.whatsapp}</p>}
-            {info?.facebook && (
-              <p>
-                Facebook:{" "}
-                <a href={info.facebook} className="text-[#c59a3b]">
-                  {info.facebook}
-                </a>
-              </p>
-            )}
+          {/* ADDRESS */}
+          <div className="bg-[#f1f1f1] rounded-xl p-4 flex gap-3">
+            <MapPin className="text-gray-700 mt-1" />
+            <p className="text-sm">
+              Tuul gol street Dul building, 97/36, HUD - 19 khoroo, Ulaanbaatar
+              17042, Mongolia
+            </p>
+          </div>
+
+          {/* PHONE */}
+          <div className="bg-[#f1f1f1] rounded-xl p-4 flex gap-3 items-center">
+            <Phone className="text-gray-700" />
+            <p className="text-sm">{info.phone1}</p>
+          </div>
+
+          {/* EMAIL */}
+          <div className="bg-[#f1f1f1] rounded-xl p-4 flex gap-3 items-center">
+            <Mail className="text-gray-700" />
+            <p className="text-sm">{info.email}</p>
           </div>
         </div>
       </div>

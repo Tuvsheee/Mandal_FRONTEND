@@ -3,6 +3,7 @@ import { Additional } from "@/types/additional";
 import axiosInstance from "@/utils/axios";
 import IMGURL from "@/utils/constant";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 import React, { useEffect, useState } from "react";
 import DefaultContainer from "../Layout/DefaultContainer";
@@ -73,12 +74,13 @@ const About: React.FC = () => {
   return (
     <DefaultContainer>
       <div className="relative w-full h-screen">
-        {/* Background Image */}
         {additionalData?.aboutCover1 && (
-          <img
+          <Image
             src={`${IMGURL}/${additionalData.aboutCover1}`}
             alt="Cover"
-            className="w-full h-[100vh] object-cover"
+            fill
+            className="object-cover "
+            priority
           />
         )}
         {/* Overlay */}
@@ -89,9 +91,24 @@ const About: React.FC = () => {
           </div>
         </div>
       </div>
+      {/* Background Image */}
 
       <div className="w-full max-w-4xl flex my-12 mx-12">
-        <span className="text-2xl ">{additionalData?.description2}</span>
+        <span
+          className="text-2xl "
+          dangerouslySetInnerHTML={{
+            __html: additionalData?.description2 || "",
+          }}
+        ></span>
+      </div>
+      <div className="absolute -left-80 top-[1200px] w-1/2 h-full z-0 opacity-35">
+        <Image
+          src="/back1.avif"
+          alt="Background"
+          fill
+          className="object-cover"
+          priority
+        />
       </div>
     </DefaultContainer>
   );

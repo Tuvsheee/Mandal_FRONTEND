@@ -5,4 +5,5 @@ export interface Category {
   photo: string;
   language: "kr" | "en" | "mn" | "chn" | "jp";
   createdAt: string;
+  sort?: number;
 }
