@@ -67,11 +67,11 @@ export const metadata: Metadata = {
     title: "Mandal Travel LLC | Аялал жуулчлалын үйлчилгээ",
     description:
       "Монгол болон Солонгосын үзэсгэлэнт аяллуудыг мэргэжлийн түвшинд зохион байгуулдаг аялал жуулчлалын компани.",
-    url: "https://jinstod.mn",
+    url: "https://mandaltoursmongolia.com",
     siteName: "Mandal Travel",
     images: [
       {
-        url: "https://jinstod.mn/logo.png",
+        url: "https://mandaltoursmongolia.com/logo.png",
         width: 1200,
         height: 630,
         alt: "Mandal аяллын зураг",
@@ -85,7 +85,7 @@ export const metadata: Metadata = {
     title: "Mandal Travel | Аяллын үйлчилгээ",
     description:
       "Монгол, Солонгос чиглэлийн аялал жуулчлалын онцгой үйлчилгээ.",
-    images: ["https://jinstod.mn/logo.png"],
+    images: ["https://mandaltoursmongolia.com/logo.png"],
   },
 };
 
