@@ -145,7 +145,7 @@ const Header = () => {
                     ? ""
                     : "underline"
                 }`}
-                href="/tours/inbound?type=tours"
+               href="/tours/outbound"
               >
                 Tours
               </Link>
