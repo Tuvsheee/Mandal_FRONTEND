@@ -99,7 +99,7 @@ function CategoryGrid({ title, tours }: { title: string; tours: Travel[] }) {
     >
       <motion.h2
         variants={itemVariants}
-        className="text-sm font-semibold text-slate-900"
+        className="text-2xl font-semibold text-slate-900"
       >
         {title}
       </motion.h2>
@@ -149,7 +149,7 @@ export default function HomeTravelShowcase({ travels }: { travels: Travel[] }) {
         >
           <motion.h2
             variants={itemVariants}
-            className="text-sm font-semibold text-slate-900"
+            className="text-2xl font-semibold text-slate-900"
           >
             Special tours
           </motion.h2>

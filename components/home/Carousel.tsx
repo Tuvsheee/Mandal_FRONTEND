@@ -9,8 +9,8 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import Slider, { Settings } from "react-slick";
 
-import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 interface Props {
   banner: Banner[];
@@ -30,7 +30,7 @@ const CarouselSlider = ({
     axiosInstance
       .get("/additional")
       .then((res) => setAdditional(res.data.data))
-      .catch((err) => console.error(err));
+      .catch(console.error);
   }, []);
 
   const settings: Settings = {
@@ -54,7 +54,7 @@ const CarouselSlider = ({
     ),
   };
 
-  /* ---------------- TYPEWRITER COMPONENT ---------------- */
+  /* TYPEWRITER TITLE */
   const TypewriterTitle = ({ text }: { text: string }) => {
     const [display, setDisplay] = useState("");
 
@@ -63,13 +63,13 @@ const CarouselSlider = ({
       let i = 0;
       const chars = Array.from(text);
 
-      const interval = setInterval(() => {
+      const timer = setInterval(() => {
         i++;
         setDisplay(chars.slice(0, i).join(""));
-        if (i >= chars.length) clearInterval(interval);
+        if (i >= chars.length) clearInterval(timer);
       }, 40);
 
-      return () => clearInterval(interval);
+      return () => clearInterval(timer);
     }, [text, activeIndex]);
 
     return (
@@ -80,14 +80,13 @@ const CarouselSlider = ({
         className={
           variant === "home"
             ? "text-4xl md:text-7xl font-bold drop-shadow-md"
-            : "text-lg md:text-2xl font-bold "
+            : "text-lg md:text-2xl font-bold"
         }
       >
         {display}
       </motion.h1>
     );
   };
-  /* ------------------------------------------------------ */
 
   return (
     <div className="relative w-full h-screen">
@@ -97,8 +96,8 @@ const CarouselSlider = ({
             {slide.fileType === "image" ? (
               <img
                 src={`${IMGURL}/${slide.file}`}
-                className="w-full h-screen object-cover"
                 alt=""
+                className="w-full h-screen object-cover"
               />
             ) : (
               <video
@@ -112,10 +111,10 @@ const CarouselSlider = ({
 
             {/* OVERLAY TEXT */}
             <div
-              className={`absolute inset-0 flex flex-col  items-start text-white text-left px-32 z-10 ${
+              className={`absolute inset-0 z-10 flex flex-col items-start px-32 text-white ${
                 variant === "home"
-                  ? "max-w-44 justify-center"
-                  : "max-w-[700px] justify-end py-24"
+                  ? "justify-center max-w-[900px]"
+                  : "justify-end py-24 max-w-[700px]"
               }`}
             >
               <TypewriterTitle text={slide.title1} />
@@ -123,72 +122,6 @@ const CarouselSlider = ({
           </div>
         ))}
       </Slider>
-      {/* LEFT SOCIAL ICONS */}
-      <div className="absolute left-8 top-1/2 -translate-y-1/2 z-50 flex flex-col items-center gap-4 text-white">
-        <div className="bg-white h-12 w-1" />
-
-        {additional?.facebook && (
-          <Link
-            href={additional.facebook}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group transition-transform duration-200 hover:-translate-y-0.5 hover:scale-110"
-          >
-            <img
-              src="/icons/facebook.svg"
-              alt="Facebook"
-              className="w-6 h-6 opacity-80 transition-opacity duration-200 group-hover:opacity-100"
-            />
-          </Link>
-        )}
-
-        {additional?.youtube && (
-          <Link
-            href={additional.youtube}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group transition-transform duration-200 hover:-translate-y-0.5 hover:scale-110"
-          >
-            <img
-              src="/icons/twitter.svg"
-              alt="YouTube"
-              className="w-6 h-6 opacity-80 transition-opacity duration-200 group-hover:opacity-100"
-            />
-          </Link>
-        )}
-
-        {additional?.instagram && (
-          <Link
-            href={additional.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group transition-transform duration-200 hover:-translate-y-0.5 hover:scale-110"
-          >
-            <img
-              src="/icons/instagram.svg"
-              alt="Instagram"
-              className="w-6 h-6 opacity-80 transition-opacity duration-200 group-hover:opacity-100"
-            />
-          </Link>
-        )}
-
-        {additional?.kakao && (
-          <Link
-            href={additional.kakao}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group transition-transform duration-200 hover:-translate-y-0.5 hover:scale-110"
-          >
-            <img
-              src="/icons/kakao.svg"
-              alt="Kakao"
-              className="w-6 h-6 opacity-80 transition-opacity duration-200 group-hover:opacity-100"
-            />
-          </Link>
-        )}
-
-        <div className="bg-white h-12 w-1" />
-      </div>
     </div>
   );
 };
