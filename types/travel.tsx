@@ -15,11 +15,11 @@ export interface Travel {
   price: string;
   isSpecial: boolean;
   createdAt: string;
-  pax: any;
+  includedPrice: any;
   transportation?: string;
   services?: string;
   sale?: string;
-  information: string;
+  excludesPrice: string;
   highlights?: string[];
 }
 
