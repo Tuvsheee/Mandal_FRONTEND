@@ -52,7 +52,11 @@ export default function headertypePages() {
           )}
         </div>
 
-        <div className="absolute -left-80 top-[1200px] w-1/2 h-full z-0 opacity-35">
+        <div
+          className={`absolute -left-80 ${
+            pageType === "booking" ? "hidden" : "top-[1200px]"
+          } w-1/2 h-full z-0 opacity-35`}
+        >
           <Image
             src="/back1.avif"
             alt="Background"
