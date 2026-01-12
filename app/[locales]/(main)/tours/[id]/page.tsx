@@ -401,7 +401,7 @@ const TravelDetailScreen = () => {
               </div>
             ) : null}
 
-            <div className="max-w-6xl mx-auto mt-6 md:mt-10 pb-12">
+            <div className=" mx-auto mt-6 md:mt-10 pb-12 flex justify-center items-center">
               <GallerySlider images={single.gallery || []} />
             </div>
           </>
