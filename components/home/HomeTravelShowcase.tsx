@@ -88,6 +88,7 @@ const itemVariants = {
 
 function CategoryGrid({ title, tours }: { title: string; tours: Travel[] }) {
   if (!tours || tours.length === 0) return null;
+  console.log("✌️tours --->", tours);
 
   return (
     <motion.section

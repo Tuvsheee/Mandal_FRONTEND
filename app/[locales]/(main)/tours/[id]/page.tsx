@@ -204,33 +204,37 @@ const TravelDetailScreen = () => {
 
     return (
       <>
-        <div className="space-y-3 mb-12 ">
-          <div>
-            <span className="text-[13px] font-bold text-neutral-900">
-              Destination:
-            </span>{" "}
-            <span className="text-[13px] text-neutral-600 italic leading-relaxed">
-              {dest || "—"}
-            </span>
-          </div>
+        <div className="space-y-3 mb-12">
+          {dest ? (
+            <div>
+              <p className="text-[13px] font-bold text-neutral-900 mb-1">
+                Destination:
+              </p>
+              <p className="text-[13px] text-neutral-600 italic leading-relaxed">
+                {dest}
+              </p>
+            </div>
+          ) : null}
 
-          <div>
-            <span className="text-[13px] font-bold text-neutral-900">
-              Highlights:
-            </span>{" "}
-            <span className="text-[13px] text-neutral-700 italic leading-relaxed whitespace-pre-line">
-              {hi || "—"}
-            </span>
-          </div>
+          {hi ? (
+            <div>
+              <p className="text-[13px] font-bold text-neutral-900 mb-1">
+                Highlights:
+              </p>
+              <p className="text-[13px] text-neutral-700 italic leading-relaxed whitespace-pre-line">
+                {hi}
+              </p>
+            </div>
+          ) : null}
 
           {s?.coveringDistance ? (
             <div>
-              <span className="text-[13px] font-bold text-neutral-900">
+              <p className="text-[13px] font-bold text-neutral-900 mb-1">
                 Covering distance:
-              </span>{" "}
-              <span className="text-[13px] text-neutral-700 italic leading-relaxed whitespace-pre-line">
+              </p>
+              <p className="text-[13px] text-neutral-700 italic leading-relaxed whitespace-pre-line">
                 {pickText(s.coveringDistance)}
-              </span>
+              </p>
             </div>
           ) : null}
         </div>
@@ -263,17 +267,27 @@ const TravelDetailScreen = () => {
           ) : null}
 
           <div className="text-[13px] text-neutral-800 italic leading-tight">
-            <p className="font-bold not-italic mb-1">Included in the price:</p>
-            <p className="whitespace-pre-line leading-[1.25]">
-              {tight(inc || includedPrice) || "—"}
-            </p>
+            {tight(inc || includedPrice) ? (
+              <>
+                <p className="font-bold not-italic mb-1">
+                  Included in the price:
+                </p>
+                <p className="whitespace-pre-line leading-[1.25]">
+                  {tight(inc || includedPrice)}
+                </p>
+              </>
+            ) : null}
 
-            <p className="font-bold not-italic mt-3 mb-1">
-              Exclude in the price:
-            </p>
-            <p className="whitespace-pre-line leading-[1.25]">
-              {tight(exc || excludesPrice) || "—"}
-            </p>
+            {tight(exc || excludesPrice) ? (
+              <>
+                <p className="font-bold not-italic mt-3 mb-1">
+                  Exclude in the price:
+                </p>
+                <p className="whitespace-pre-line leading-[1.25]">
+                  {tight(exc || excludesPrice)}
+                </p>
+              </>
+            ) : null}
           </div>
         </div>
 
