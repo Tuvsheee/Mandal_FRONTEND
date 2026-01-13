@@ -11,11 +11,11 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: {
-    default: "Mandal Travel LLC",
+    default: "Mandal Tours Mongolia",
     template: "%s | Mandal Travel",
   },
   description:
-    "Mandal Travel LLC - Монгол болон Солонгосын аялал жуулчлалын шилдэг үйлчилгээ үзүүлэгч.",
+    "Mandal Tours Mongolia - Монгол болон Солонгосын аялал жуулчлалын шилдэг үйлчилгээ үзүүлэгч.",
   icons: {
     icon: "/logo.png",
   },
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Mandal Travel LLC | Аялал жуулчлалын үйлчилгээ",
+    title: "Mandal Tours Mongolia | Аялал жуулчлалын үйлчилгээ",
     description:
       "Монгол болон Солонгосын үзэсгэлэнт аяллуудыг мэргэжлийн түвшинд зохион байгуулдаг аялал жуулчлалын компани.",
     url: "https://mandaltoursmongolia.com",
