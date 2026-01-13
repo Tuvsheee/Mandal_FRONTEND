@@ -166,7 +166,7 @@ const TravelDetailScreen = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.4 }}
-        className="text-lg md:text-3xl text-white font-bold leading-snug"
+        className="text-lg md:text-4xl text-white font-bold leading-snug"
       >
         {display}
       </motion.h1>
@@ -312,8 +312,8 @@ const TravelDetailScreen = () => {
         />
         <div className="absolute inset-0 bg-black/35" />
 
-        <div className="absolute inset-0 z-10 flex items-end px-4 md:px-24 pb-10 md:pb-16">
-          <div className="max-w-[820px]">
+        <div className="absolute inset-0 z-10 flex items-center px-4 md:px-24 pb-10 md:pb-16">
+          <div className="max-w-[360px]">
             <TypewriterTitle text={titleText} />
           </div>
         </div>

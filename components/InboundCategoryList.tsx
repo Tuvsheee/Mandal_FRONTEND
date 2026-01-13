@@ -15,11 +15,9 @@ const InboundCategoryList = () => {
     fetchData();
   }, []);
 
-  const filteredCategories = data.filter(
-    (cat) => cat.language === locale
-  );
+  const filteredCategories = data.filter((cat) => cat.language === locale);
 
-  return ( 
+  return (
     <CustomContainer>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full mt-6">
         {filteredCategories.map((cat) => (
