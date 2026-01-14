@@ -21,7 +21,7 @@ const MostPopularTours: React.FC<MostPopularToursProps> = ({
   }
 
   return (
-    <section className="w-full py-16">
+    <section className="w-full py-16 px-4 md:px-0 ">
       <div className="max-w-6xl mx-auto ">
         <h2 className="text-3xl  mb-8 font-semibold text-[#111f13]">
           Most popular tours

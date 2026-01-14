@@ -28,20 +28,22 @@ const Footer = () => {
 
   return (
     <footer className="bg-[#0f1d13] text-white">
-      <div className="mx-auto max-w-7xl px-6 py-4">
-        <div className="flex h-16 items-center justify-between">
+      <div className="mx-auto max-w-7xl px-6 py-6">
+        <div className="flex flex-col md:flex-row md:h-16 items-center md:justify-between gap-6 md:gap-0">
           {/* LEFT TEXT */}
-          <div className="text-md text-white">Member of..</div>
+          <div className="text-md text-white text-center md:text-left">
+            Member of..
+          </div>
 
           {/* RIGHT ICONS */}
-          <div className="flex items-center gap-14 mr-16 cursor-pointer">
-            {/* Custom Icon (like knot logo in image) */}
+          <div className="flex flex-wrap justify-center md:justify-end items-center gap-6 md:gap-14 md:mr-16 cursor-pointer">
+            {/* MTO */}
             {additional?.mto && (
               <Link href={additional.mto} target="_blank">
                 <img
                   src="/icons/mn.avif"
-                  alt=""
-                  className="h-16 w-16 hover:scale-105 transition"
+                  alt="MTO"
+                  className="h-12 w-12 md:h-16 md:w-16 hover:scale-105 transition"
                 />
               </Link>
             )}
@@ -52,49 +54,37 @@ const Footer = () => {
                 <img
                   src="/icons/trpadvisor.avif"
                   alt="Tripadvisor"
-                  className="h-20 w-20 hover:scale-105 transition"
+                  className="h-14 w-14 md:h-20 md:w-20 hover:scale-105 transition"
                 />
               </Link>
             )}
 
             {/* Facebook */}
             {additional?.facebook && (
-              <Link
-                href={additional.facebook}
-                target="_blank"
-                className="hover:scale-105 transition"
-              >
+              <Link href={additional.facebook} target="_blank">
                 <img
                   src="/icons/fb.avif"
-                  alt="Tripadvisor"
-                  className="h-12 w-12 hover:scale-105 transition"
+                  alt="Facebook"
+                  className="h-10 w-10 md:h-12 md:w-12 hover:scale-105 transition"
                 />
               </Link>
             )}
 
             {/* Instagram */}
             {additional?.instagram && (
-              <Link
-                href={additional.instagram}
-                target="_blank"
-                className="hover:scale-105 transition"
-              >
+              <Link href={additional.instagram} target="_blank">
                 <img
                   src="/icons/inst.avif"
-                  alt="Tripadvisor"
-                  className="h-12 w-12 hover:scale-105 transition"
+                  alt="Instagram"
+                  className="h-10 w-10 md:h-12 md:w-12 hover:scale-105 transition"
                 />
               </Link>
             )}
 
             {/* Youtube */}
             {additional?.youtube && (
-              <Link
-                href={additional.youtube}
-                target="_blank"
-                className="hover:scale-105 transition"
-              >
-                <Youtube size={22} />
+              <Link href={additional.youtube} target="_blank">
+                <Youtube className="h-6 w-6 md:h-[22px] md:w-[22px] hover:scale-105 transition" />
               </Link>
             )}
           </div>

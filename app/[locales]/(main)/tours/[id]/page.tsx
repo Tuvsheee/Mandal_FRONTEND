@@ -369,7 +369,7 @@ const TravelDetailScreen = () => {
                 <div className="rounded-2xl bg-[#ededed] border border-neutral-200 p-4 md:p-10 shadow-sm">
                   <div
                     className="
-    text-[13px] md:text-[16px] text-neutral-700 mr-44 
+    text-[13px] md:text-[16px] text-neutral-700 md:mr-44 
 
     [&_ul]:list-disc
     [&_ul]:pl-10

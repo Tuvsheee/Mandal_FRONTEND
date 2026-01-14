@@ -35,25 +35,40 @@ export default function headertypePages() {
 
   return (
     <DefaultContainer>
-      <div className="w-full  text-white ">
+      <div className="w-full text-white relative">
         <section className="relative isolate overflow-hidden">
           <CarouselSlider showArrow banner={filteredBanners} variant="tours" />
         </section>
-        <div className="w-full flex flex-col items-center justify-center ">
+
+        <div className="w-full flex flex-col items-center justify-center">
           {filteredBanners.length > 0 && filteredBanners[0]?.description && (
-            <div className="w-full max-w-4xl flex my-12 mx-12">
+            <div className="w-full max-w-4xl my-6 md:my-12 px-4 md:px-12 overflow-x-hidden">
               <span
-                className="text-2xl "
+                className="
+          text-base md:text-2xl
+          text-center md:text-left
+          break-words
+          overflow-x-hidden
+
+          [&_*]:max-w-full
+          [&_img]:h-auto
+          [&_img]:max-w-full
+          [&_iframe]:max-w-full
+          [&_table]:block
+          [&_table]:max-w-full
+          [&_table]:overflow-x-auto
+        "
                 dangerouslySetInnerHTML={{
                   __html: filteredBanners[0].description || "",
                 }}
-              ></span>
+              />
             </div>
           )}
         </div>
 
+        {/* Background decoration — desktop only */}
         <div
-          className={`absolute -left-80 ${
+          className={`hidden md:block absolute -left-80 ${
             pageType === "booking" ? "hidden" : "top-[1200px]"
           } w-1/2 h-full z-0 opacity-35`}
         >
