@@ -12,18 +12,20 @@ function TravelCard({
   className = "",
   showCategory = false,
   imageOnly = false,
+  objectPosition = "center",
 }: {
   travel: Travel;
   className?: string;
   showCategory?: boolean;
   imageOnly?: boolean;
+  objectPosition?: string;
 }) {
   return (
     <Link
       href={`/tours/${travel._id}`}
       className={[
         "group block overflow-hidden rounded-xl border border-slate-200 bg-white",
-        "transition hover:shadow-md hover:scale-105 flex h-full flex-col",
+        "transition hover:shadow-md hover:scale-[1.02] flex h-full flex-col",
         className,
       ].join(" ")}
     >
@@ -38,26 +40,29 @@ function TravelCard({
           src={`${IMGURL}/${travel.cover}`}
           alt={travel.title}
           className="absolute inset-0 h-full w-full object-cover"
+          style={{ objectPosition }}
           whileHover={{ scale: 1.06 }}
           transition={{ duration: 0.35 }}
         />
       </div>
 
-      <div className="border-t border-slate-200 bg-white p-3">
-        {showCategory &&
-          typeof travel.category === "object" &&
-          travel.category && (
-            <div className="mb-1 text-[10px] text-slate-500">
-              <span className="font-semibold">{travel.category.name}</span>
-            </div>
-          )}
+      {!imageOnly && (
+        <div className="border-t border-slate-200 bg-white p-3">
+          {showCategory &&
+            typeof travel.category === "object" &&
+            travel.category && (
+              <div className="mb-1 text-[10px] text-slate-500">
+                <span className="font-semibold">{travel.category.name}</span>
+              </div>
+            )}
 
-        <div className="text-[11px] font-semibold uppercase tracking-wide text-slate-900 underline underline-offset-2 line-clamp-1">
-          {travel.title}
+          <div className="text-[11px] font-semibold uppercase tracking-wide text-slate-900 underline underline-offset-2 line-clamp-1">
+            {travel.title}
+          </div>
+
+          <div className="mt-1 text-[11px] text-black">{travel.duration}</div>
         </div>
-
-        <div className="mt-1 text-[11px] text-black">{travel.duration}</div>
-      </div>
+      )}
     </Link>
   );
 }
@@ -88,7 +93,6 @@ const itemVariants = {
 
 function CategoryGrid({ title, tours }: { title: string; tours: Travel[] }) {
   if (!tours || tours.length === 0) return null;
-  console.log("✌️tours --->", tours);
 
   return (
     <motion.section
@@ -132,14 +136,15 @@ export default function HomeTravelShowcase({ travels }: { travels: Travel[] }) {
     (t) => !t.isSpecial && t.category?.name === "Day tours"
   );
 
-  const s = specialTours.slice(0, 6);
+  // ✅ total 7 special tours
+  const s = specialTours.slice(0, 7);
 
   return (
     <div className="mx-auto max-w-6xl px-6 pb-20">
       {/* 1️⃣ DISCOVERY */}
       <CategoryGrid title="Discovery tours" tours={discoveryTours} />
 
-      {/* 2️⃣ SPECIAL (CUSTOM LAYOUT) */}
+      {/* 2️⃣ SPECIAL (MOSAIC LIKE IMAGE) */}
       {s.length > 0 && (
         <motion.section
           variants={sectionVariants}
@@ -159,39 +164,59 @@ export default function HomeTravelShowcase({ travels }: { travels: Travel[] }) {
             variants={itemVariants}
             className="mt-4 grid grid-cols-12 gap-5"
           >
+            {/* BIG (like sky+field) */}
             {s[0] && (
               <motion.div className="col-span-12 md:col-span-8">
-                <TravelCard travel={s[0]} className="min-h-[200px]" />
+                <TravelCard
+                  travel={s[0]}
+                  className="min-h-[220px]"
+                  objectPosition="center 30%"
+                />
               </motion.div>
             )}
 
+            {/* RIGHT TOP */}
             {s[1] && (
               <motion.div className="col-span-12 md:col-span-4">
-                <TravelCard travel={s[1]} className="min-h-[200px]" />
+                <TravelCard travel={s[1]} className="min-h-[220px]" />
               </motion.div>
             )}
 
+            {/* LEFT TALL IMAGE-ONLY */}
             {s[2] && (
-              <motion.div className="col-span-12 md:col-span-4 md:row-span-2">
-                <TravelCard travel={s[2]} className="min-h-[400px]" imageOnly />
+              <motion.div className="col-span-12 md:col-span-4 md:row-span-1">
+                <TravelCard travel={s[2]} className="min-h-[170px]" />
               </motion.div>
             )}
 
+            {/* MIDDLE SMALL */}
             {s[3] && (
               <motion.div className="col-span-12 sm:col-span-6 md:col-span-4">
-                <TravelCard travel={s[3]} className="min-h-[150px]" />
+                <TravelCard travel={s[3]} className="min-h-[170px]" />
               </motion.div>
             )}
 
+            {/* RIGHT SMALL */}
             {s[4] && (
               <motion.div className="col-span-12 sm:col-span-6 md:col-span-4">
-                <TravelCard travel={s[4]} className="min-h-[150px]" />
+                <TravelCard travel={s[4]} className="min-h-[170px]" />
               </motion.div>
             )}
 
+            {/* ✅ 7th card (bottom-right small) */}
+            {s[6] && (
+              <motion.div className="col-span-12 sm:col-span-6 md:col-span-4">
+                <TravelCard travel={s[6]} className="min-h-[170px]" />
+              </motion.div>
+            )}
+            {/* WIDE BOTTOM */}
             {s[5] && (
               <motion.div className="col-span-12 md:col-span-8">
-                <TravelCard travel={s[5]} className="min-h-[150px]" />
+                <TravelCard
+                  travel={s[5]}
+                  className="min-h-[170px]"
+                  objectPosition="center 40%"
+                />
               </motion.div>
             )}
           </motion.div>
