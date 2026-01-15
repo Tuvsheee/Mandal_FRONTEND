@@ -6,4 +6,5 @@ export interface Banner {
   description: string;
   fileType: "image" | "video";
   file: string;
+  gallery?: string[];
 }

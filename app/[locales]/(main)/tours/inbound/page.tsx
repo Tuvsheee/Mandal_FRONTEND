@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import DefaultContainer from "@/components/Layout/DefaultContainer";
 import Image from "next/image";
 import BookTravel from "@/components/home/Book";
+import GallerySlider from "@/components/home/GallerySlider";
 
 export default function headertypePages() {
   const searchParams = useSearchParams();
@@ -42,7 +43,7 @@ export default function headertypePages() {
 
         <div className="w-full flex flex-col items-center justify-center">
           {filteredBanners.length > 0 && filteredBanners[0]?.description && (
-            <div className="w-full max-w-4xl my-6 md:my-12 px-4 md:px-12 overflow-x-hidden">
+            <div className="w-full max-w-4xl mt-12 px-4 md:px-12 overflow-x-hidden">
               <span
                 className="
           text-base md:text-2xl
@@ -64,6 +65,15 @@ export default function headertypePages() {
               />
             </div>
           )}
+
+          {pageType === "blog" &&
+            filteredBanners.length > 0 &&
+            filteredBanners[0]?.gallery &&
+            filteredBanners[0].gallery.length > 0 && (
+              <div className="w-full max-w-6xl mb-6 px-4 md:px-12">
+                <GallerySlider images={filteredBanners[0].gallery || []} />
+              </div>
+            )}
         </div>
       </div>
     </DefaultContainer>
