@@ -26,7 +26,7 @@ export default function CustomTravelPage() {
   const info = data;
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -124,7 +124,12 @@ export default function CustomTravelPage() {
           {/* EMAIL */}
           <div className="bg-[#f1f1f1] rounded-xl p-4 flex gap-3 items-center">
             <Mail className="text-gray-700" />
-            <p className="text-sm">{info.email}</p>
+            <a
+              href={`mailto:${info.email}`}
+              className="text-sm hover:underline"
+            >
+              {info.email}
+            </a>
           </div>
         </div>
       </div>
