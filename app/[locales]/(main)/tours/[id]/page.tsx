@@ -71,51 +71,119 @@ const TravelDetailScreen = () => {
 
     return "";
   };
+  useEffect(() => {
+    const removeBranding = () => {
+      // 1) class-based
+      document
+        .querySelectorAll(".fr-credit, #fr-logo, .fr-logo")
+        .forEach((el) => el.remove());
 
-  // ✅ Framer HTML (absolute div/svg/styles) -> clean Day itinerary list HTML
+      // 2) href-based
+      document
+        .querySelectorAll('a[href*="froala"], a[href*="froala.com"]')
+        .forEach((el) => el.remove());
+
+      // 3) text-based ("Powered by")
+      document.querySelectorAll("a, div, span, p").forEach((el) => {
+        const t = (el.textContent || "").toLowerCase();
+        if (t.includes("powered by") && t.includes("froala")) {
+          el.remove();
+        }
+      });
+    };
+
+    removeBranding();
+
+    const observer = new MutationObserver(removeBranding);
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    return () => observer.disconnect();
+  }, []);
+
+  // ✅ Framer/Froala HTML -> clean Day itinerary list HTML
   const sanitizeAndFormatItinerary = (rawHtml: string) => {
     if (!rawHtml) return "";
 
-    let html = rawHtml;
+    let html = String(rawHtml);
 
-    // remove framer svg-bullet div blocks
+    // ✅ 1) Remove Froala branding / leftovers (your case: "Powered by" alone)
+    html = html
+      .replace(/Powered by Froala Editor/gi, "")
+      .replace(/Powered by\s*<\/p>/gi, "</p>") // handles: "... Powered by</p>"
+      .replace(/Powered by/gi, "") // handles: "Powered by" left alone
+      .replace(/Froala Editor/gi, "")
+      .replace(
+        /<a[^>]*\bclass=("|')[^"']*\bfr-credit\b[^"']*("|')[\s\S]*?<\/a>/gi,
+        "",
+      )
+      .replace(
+        /<div[^>]*\bclass=("|')[^"']*\bfr-credit\b[^"']*("|')[\s\S]*?<\/div>/gi,
+        "",
+      )
+      .replace(
+        /<span[^>]*\bclass=("|')[^"']*\bfr-credit\b[^"']*("|')[\s\S]*?<\/span>/gi,
+        "",
+      )
+      .replace(/<p[^>]*>\s*Powered by\s*<\/p>/gi, ""); // full powered-by paragraph
+
+    // ✅ 2) Remove Framer SVG bullet blocks
     html = html.replace(
       /<div[^>]*data-framer-component-type="SVG"[\s\S]*?<\/div>/gi,
-      ""
+      "",
     );
 
-    // unwrap rich text container opening tag, and remove ending wrapper
+    // ✅ 3) Remove rich text container wrappers
     html = html.replace(
       /<div[^>]*data-framer-component-type="RichTextContainer"[^>]*>/gi,
-      ""
+      "",
     );
     html = html.replace(/<\/div>\s*$/gi, "");
 
-    // remove ALL inline styles and data-* attrs to prevent absolute positioning
+    // ✅ 4) Remove ALL inline styles + data attrs
     html = html
       .replace(/\sstyle=('|")[\s\S]*?('|")/gi, "")
       .replace(/\sdata-[a-z0-9-]+=('|")[\s\S]*?('|")/gi, "");
 
-    // br -> newline
+    // ✅ 5) br -> newline
     html = html.replace(/<br\s*\/?>/gi, "\n");
 
-    // extract text from <p> blocks
+    // ✅ 6) Extract text from <p> blocks (preferred)
     const pMatches = Array.from(html.matchAll(/<p[^>]*>([\s\S]*?)<\/p>/gi)).map(
-      (m) => (m[1] || "").replace(/<[^>]+>/g, "").trim()
+      (m) => (m[1] || "").replace(/<[^>]+>/g, "").trim(),
     );
 
-    const lines = pMatches
+    let lines = pMatches
       .map((x) => x.replace(/\s+/g, " ").trim())
       .filter(Boolean);
 
-    // group into Day blocks
+    // Fallback: if no <p> found, strip all tags
+    if (lines.length === 0) {
+      const textOnly = html
+        .replace(/<[^>]+>/g, "\n")
+        .replace(/[ \t]+\n/g, "\n")
+        .replace(/\n{2,}/g, "\n")
+        .trim();
+
+      lines = textOnly
+        .split("\n")
+        .map((x) => x.replace(/\s+/g, " ").trim())
+        .filter(Boolean);
+    }
+
+    // ✅ 7) Remove any leftover branding lines
+    lines = lines.filter(
+      (l) => !/powered by/i.test(l) && !/froala editor/i.test(l),
+    );
+
+    // ✅ 8) Group into Day blocks (Day 1 / DAY1 / Day-1 / Day 1:)
     const items: { title: string; body: string[] }[] = [];
     let current: { title: string; body: string[] } | null = null;
 
-    for (const line of lines) {
-      const isDay = /^day\s*\d+/i.test(line);
+    const isDayLine = (line: string) =>
+      /^day[\s-]*\d+[:.)-]?/i.test(line) || /^өдөр[\s-]*\d+/i.test(line);
 
-      if (isDay) {
+    for (const line of lines) {
+      if (isDayLine(line)) {
         if (current) items.push(current);
         current = { title: line, body: [] };
       } else {
@@ -125,21 +193,21 @@ const TravelDetailScreen = () => {
     }
     if (current) items.push(current);
 
-    // build clean HTML for styling
+    // ✅ 9) Build clean HTML for your Tailwind styling
     const out =
-      `<ul>` +
+      "<ul>" +
       items
         .map((it) => {
           const body = it.body.length ? it.body.join(" ") : "";
           return (
-            `<li>` +
+            "<li>" +
             `<p><strong>${it.title}</strong></p>` +
             `<p>${body}</p>` +
-            `</li>`
+            "</li>"
           );
         })
         .join("") +
-      `</ul>`;
+      "</ul>";
 
     return out;
   };

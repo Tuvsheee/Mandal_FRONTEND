@@ -33,3 +33,19 @@
 .animate-slideInRight {
   animation: slideInRight 0.6s ease-out;
 }
+
+/* ✅ Hide any Froala credit link by href */
+a[href*="froala"],
+a[href*="froala.com"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* ✅ Hide common Froala logo ids/classes */
+#fr-logo,
+.fr-logo,
+.fr-wrapper + a {
+  display: none !important;
+}
