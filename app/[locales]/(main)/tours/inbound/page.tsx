@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import DefaultContainer from "@/components/Layout/DefaultContainer";
 import Image from "next/image";
 import GallerySlider from "@/components/home/GallerySlider";
+import Book from "@/components/home/Book";
 
 export default function headertypePages() {
   const searchParams = useSearchParams();
@@ -27,6 +28,9 @@ export default function headertypePages() {
       <DefaultContainer>
         <section className="relative isolate overflow-hidden">
           <CarouselSlider showArrow banner={filteredBanners} variant="tours" />
+          <div className="flex justify-center ">
+            <Book />
+          </div>
         </section>
       </DefaultContainer>
     );
