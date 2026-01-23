@@ -7,7 +7,6 @@ import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import DefaultContainer from "@/components/Layout/DefaultContainer";
 import Image from "next/image";
-import BookTravel from "@/components/home/Book";
 import GallerySlider from "@/components/home/GallerySlider";
 
 export default function headertypePages() {
@@ -29,7 +28,6 @@ export default function headertypePages() {
         <section className="relative isolate overflow-hidden">
           <CarouselSlider showArrow banner={filteredBanners} variant="tours" />
         </section>
-        <BookTravel />
       </DefaultContainer>
     );
   }
