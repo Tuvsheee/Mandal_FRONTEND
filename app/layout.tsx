@@ -1,4 +1,5 @@
 import { AntdRegistry } from "@ant-design/nextjs-registry";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
@@ -103,6 +104,8 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         <AntdRegistry>{children}</AntdRegistry>
+        {/* GA4 */}
+        <GoogleAnalytics gaId="G-QWHZ4ND088" />
       </body>
     </html>
   );

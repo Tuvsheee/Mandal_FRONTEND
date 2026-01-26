@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@ant-design/nextjs-registry": "^1.0.1",
+    "@next/third-parties": "^16.1.4",
     "antd": "^5.21.3",
     "axios": "^1.7.7",
     "framer-motion": "^12.24.12",
