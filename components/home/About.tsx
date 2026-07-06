@@ -27,7 +27,7 @@ const About: React.FC = () => {
           setInView(true);
         }
       },
-      { threshold: 0.5 }
+      { threshold: 0.5 },
     );
 
     if (section) {
@@ -86,7 +86,10 @@ const About: React.FC = () => {
         {/* Overlay */}
         <div className="absolute inset-0 bg-black/30" />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4 z-10">
-          <div className="absolute inset-0 flex flex-col justify-end items-center text-center text-white px-4 py-24 z-10 md:items-start md:text-left md:px-32 max-w-[800px]">
+          <div
+            className="absolute inset-0 z-10 flex max-w-[900px] flex-col items-center justify-center px-4 text-center text-white md:items-start md:px-32 md:text-left
+"
+          >
             <TypewriterTitle text={additionalData?.description1 || ""} />
           </div>
         </div>
