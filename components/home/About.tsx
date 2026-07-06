@@ -64,7 +64,7 @@ const About: React.FC = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.4 }}
-        className="text-xl md:text-2xl font-bold drop-shadow-md"
+        className="text-2xl md:text-2xl font-bold drop-shadow-md"
       >
         {display}
       </motion.h1>
@@ -86,16 +86,16 @@ const About: React.FC = () => {
         {/* Overlay */}
         <div className="absolute inset-0 bg-black/30" />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4 z-10">
-          <div className="absolute inset-0 flex flex-col justify-end items-start text-white text-left px-32 py-24 z-10 max-w-[800px]">
+          <div className="absolute inset-0 flex flex-col justify-end items-center text-center text-white px-4 py-24 z-10 md:items-start md:text-left md:px-32 max-w-[800px]">
             <TypewriterTitle text={additionalData?.description1 || ""} />
           </div>
         </div>
       </div>
       {/* Background Image */}
       <div className="flex justify-center">
-        <div className="w-full max-w-4xl flex my-12 mx-12">
+        <div className="w-full max-w-4xl flex my-12 mx-4 md:mx-12">
           <span
-            className="text-2xl "
+            className="text-base md:text-2xl text-center md:text-left"
             dangerouslySetInnerHTML={{
               __html: additionalData?.description2 || "",
             }}

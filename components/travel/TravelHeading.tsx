@@ -26,7 +26,7 @@ const TravelHeading = ({ name }: Props) => {
   ];
   return (
     <div className="w-full flex flex-col">
-      <div className="w-full justify-end flex pb-6">
+      <div className="w-full justify-center md:justify-end flex pb-6">
         {breadcrumbLinks.map((list, index) => {
           return (
             <div className="flex items-center" key={index}>

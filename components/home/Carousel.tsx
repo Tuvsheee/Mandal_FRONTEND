@@ -77,11 +77,7 @@ const CarouselSlider = ({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.4 }}
-        className={
-          variant === "home"
-            ? "text-4xl md:text-7xl font-bold drop-shadow-md"
-            : "text-lg md:text-2xl font-bold"
-        }
+        className="text-5xl sm:text-6xl md:text-7xl font-bold leading-tight drop-shadow-md"
       >
         {display}
       </motion.h1>
@@ -111,11 +107,7 @@ const CarouselSlider = ({
 
             {/* OVERLAY TEXT */}
             <div
-              className={`absolute inset-0 z-10 flex flex-col items-start px-32 text-white ${
-                variant === "home"
-                  ? "justify-center max-w-[900px]"
-                  : "justify-end py-24 max-w-[700px]"
-              }`}
+              className="absolute inset-0 z-10 flex max-w-[900px] flex-col items-center justify-center px-4 text-center text-white md:items-start md:px-32 md:text-left"
             >
               <TypewriterTitle text={slide.title1} />
             </div>
